@@ -1,0 +1,36 @@
+<section class="layout-content-container flex flex-col max-w-auto flex-1">
+    <h2 class="p-4 text-white tracking-light text-[32px] font-bold leading-tight min-w-72">Fleet summary</h2>
+    <div class="grid grid-cols-[repeat(auto-fit,minmax(158px,1fr))] gap-3 p-4">
+        <app-vessel-card></app-vessel-card>
+        <app-voyage-card></app-voyage-card>
+        <app-use-card></app-use-card>
+        <app-routes-card></app-routes-card>
+    </div>
+    <h2 class="text-white text-[22px] font-bold leading-tight tracking-[-0.015em] px-4 pb-3 pt-5">Activity</h2>
+    <div class="grid grid-cols-[repeat(auto-fit,minmax(158px,1fr))] gap-3 p-4">
+        <div class="flex flex-col gap-3 pb-3">
+            <div class="w-full bg-center bg-no-repeat aspect-square bg-cover rounded-xl"
+                style='background-image: url("https://cdn.usegalileo.ai/sdxl10/371a0a58-c31c-4a40-b07e-4206249e411d.png");'>
+            </div>
+            <p class="text-white text-base font-medium leading-normal">Traffic</p>
+        </div>
+        <div class="flex flex-col gap-3 pb-3">
+            <div class="w-full bg-center bg-no-repeat aspect-square bg-cover rounded-xl"
+                style='background-image: url("https://cdn.usegalileo.ai/sdxl10/14260111-56c2-4ecb-90c5-f13f50126d3e.png");'>
+            </div>
+            <p class="text-white text-base font-medium leading-normal">AIS coverage</p>
+        </div>
+        <div class="flex flex-col gap-3 pb-3">
+            <div class="w-full bg-center bg-no-repeat aspect-square bg-cover rounded-xl"
+                style='background-image: url("https://cdn.usegalileo.ai/sdxl10/01ee7f03-a2d3-4da1-b0f9-2ecf12f9dcf2.png");'>
+            </div>
+            <p class="text-white text-base font-medium leading-normal">Port calls</p>
+        </div>
+    </div>
+    <div class="grid grid-cols-[repeat(auto-fit,minmax(158px,1fr))] gap-3 p-4">
+        <app-vessel-card></app-vessel-card>
+        <app-voyage-card></app-voyage-card>
+        <app-use-card></app-use-card>
+        <app-routes-card></app-routes-card>
+    </div>
+</section>
