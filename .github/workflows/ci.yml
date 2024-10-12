@@ -57,7 +57,7 @@ jobs:
         run: npm install
 
       - name: Run tests
-        run: npm test -- --watch=false --bail
+        run: npm test -- --watch=false
 
   deploy:
     runs-on: ubuntu-latest
