@@ -28,6 +28,7 @@ export class FleetSummaryComponent implements OnInit {
   ngOnInit(): void {
     this.shippingService.getVessels().subscribe((data: Vessel[]) => {
       this.vessels = data;
+      console.log(this.vessels);
     });
   }
 }

@@ -9,34 +9,54 @@ export class ShippingService {
 
   private readonly vessels: Vessel[] = [
     {
-      id: "2b6e2c34-4f51-4d71-8c55-44b354053def",
-      name: "Explorador del Mar",
-      type: "Buque Portacontenedores",
-      capacity: 10000,
-      current_location: { latitude: 34.0522, longitude: -118.2437 },
-      status: "En Tránsito",
-      containers: [
+      id: "vessel_001",
+      name: "Sea Explorer",
+      type: "Cargo Ship",
+      imo: "1234567",
+      length: 200,
+      width: 32,
+      draft: 10,
+      yearBuilt: 2015,
+      capacity: {
+        container: 1500,
+        weight: 50000
+      },
+      currentLocation: {
+        latitude: 35.6895,
+        longitude: 139.6917
+      },
+      status: "active",
+      voyages: [
         {
-          id: "c2f9e1bc-b5d6-4c7b-87d4-9c3f62f57f4c",
-          container_number: "CNSU1234567",
-          content: "Electrónica",
-          weight: 2000,
-          destination_port: "Los Ángeles"
-        },
-        {
-          id: "a9c3940e-3f3d-44c3-8c42-09338c5b67b9",
-          container_number: "MSC1234568",
-          content: "Ropa",
-          weight: 1500,
-          destination_port: "Los Ángeles"
+          voyageId: "voyage_001",
+          departurePort: "Los Angeles",
+          arrivalPort: "Tokyo",
+          departureDate: "2024-10-01",
+          arrivalDate: "2024-10-15",
+          cargo: [
+            {
+              description: "Electronics",
+              weight: 20000,
+              quantity: 100
+            },
+            {
+              description: "Furniture",
+              weight: 15000,
+              quantity: 50
+            }
+          ],
+          captain: {
+            name: "John Doe",
+            licenseNumber: "C123456",
+            experienceYears: 10
+          }
         }
       ]
     },
-
   ];
 
   constructor() {
-    // Simular datos adicionales para completar los 10 ítems
+    // Generar datos adicionales
     this.generateAdditionalVessels(10);
   }
 
@@ -46,19 +66,22 @@ export class ShippingService {
       this.vessels.push({
         id: this.generateUUID(),
         name: `Vessel ${i + 1}`,
-        type: "Buque Granelero",
-        capacity: 12000,
-        current_location: { latitude: 32 + Math.random(), longitude: -117 + Math.random() },
-        status: i % 2 === 0 ? "En Puerto" : "En Tránsito",
-        containers: [
-          {
-            id: this.generateUUID(),
-            container_number: `CONTAINER${i + 1}`,
-            content: "Granos",
-            weight: Math.floor(Math.random() * 5000),
-            destination_port: "Puerto"
-          }
-        ]
+        type: "Bulk Carrier",
+        imo: this.generateUUID(), // Usar UUID para IMO también
+        length: 180 + Math.random() * 20, // Longitud aleatoria
+        width: 30 + Math.random() * 10, // Anchura aleatoria
+        draft: 8 + Math.random() * 2, // Calado aleatorio
+        yearBuilt: 2010 + Math.floor(Math.random() * 10), // Año de construcción aleatorio
+        capacity: {
+          container: 1200 + Math.floor(Math.random() * 300), // Capacidad aleatoria
+          weight: 20000 + Math.floor(Math.random() * 5000) // Peso aleatorio
+        },
+        currentLocation: {
+          latitude: 32 + Math.random(),
+          longitude: -117 + Math.random()
+        },
+        status: i % 2 === 0 ? "In Port" : "In Transit",
+        voyages: []
       });
     }
   }
