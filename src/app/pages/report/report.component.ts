@@ -10,6 +10,7 @@ import { IconPdf } from "../../core/icons/pdf";
 import { ShippingService } from '../../service/shipping.service';
 import { Container, Vessel } from '../../models/buques.model';
 import { ActivatedRoute } from '@angular/router';
+import { ToastNotificationService } from '../../service/toast-notification.service';
 
 interface Capitan {
   id?: string;
@@ -49,7 +50,8 @@ export class ReportComponent {
   constructor(
     private readonly shippingService: ShippingService,
     private readonly route: ActivatedRoute,
-    private readonly cd: ChangeDetectorRef
+    private readonly cd: ChangeDetectorRef,
+    private readonly toastService: ToastNotificationService
   ) { }
 
   ngOnInit(): void {
@@ -79,20 +81,25 @@ export class ReportComponent {
   }
 
   async generatePDF(): Promise<void> {
-    const previewElement = document.getElementById('preview');
-    if (!previewElement) {
-      throw new Error("Preview element not found");
+    try {
+      const previewElement = document.getElementById('preview');
+      if (!previewElement) {
+        throw new Error("Preview element not found");
+      }
+
+      const canvas = await html2canvas(previewElement, { scale: 2 });
+      const imgData = canvas.toDataURL('image/png');
+      const pdf = new jsPDF();
+      const pdfWidth = pdf.internal.pageSize.width;
+      const pdfHeight = (canvas.height * pdfWidth) / canvas.width;
+
+      pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight);
+      pdf.save(`${this.invoiceNumber}.pdf`);
+
+      this.toastService.toastSuccess('PDF generated successfully!');
+    } catch (error) {
+      this.toastService.toastError('Failed to generate the PDF.');
     }
-
-    const canvas = await html2canvas(previewElement, { scale: 2 });
-    const imgData = canvas.toDataURL('image/png');
-    const pdf = new jsPDF();
-    const pdfWidth = pdf.internal.pageSize.width; // Cambiado a width
-    const pdfHeight = (canvas.height * pdfWidth) / canvas.width;
-
-    pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight);
-    pdf.save(`${this.invoiceNumber}.pdf`);
   }
-
 
 }

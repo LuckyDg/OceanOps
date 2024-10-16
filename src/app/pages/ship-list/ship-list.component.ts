@@ -50,6 +50,7 @@ export class ShipListComponent {
       this.cd.markForCheck();
     });
   }
+
   viewReports(vesselId: string): void {
     this.router.navigate(['/report', vesselId]);
   }
@@ -75,6 +76,5 @@ export class ShipListComponent {
       vessel.name.toLowerCase().includes(query)
     );
   }
-
 
 }
