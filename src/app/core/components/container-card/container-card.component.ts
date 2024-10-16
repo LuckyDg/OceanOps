@@ -1,13 +1,17 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { LucideAngularModule, Container } from 'lucide-angular';
 
 @Component({
-  selector: 'app-voyage-card',
+  selector: 'app-container-card',
   standalone: true,
   imports: [
     CommonModule,
+    LucideAngularModule
   ],
-  templateUrl: './voyage-card.component.html',
+  templateUrl: './container-card.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class VoyageCardComponent { }
+export class ContainerCardComponent {
+  Container = Container;
+}

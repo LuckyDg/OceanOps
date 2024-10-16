@@ -1,0 +1,15 @@
+<button class="relative flex items-center" type="button" (click)="openMenu()">
+    <ng-container *ngComponentOutlet="buttonIcon"></ng-container>
+    <div *ngIf="isOpen"
+        class="z-10 absolute right-0 top-7 p-1 min-w-24 bg-black rounded-md border border-gray-500/50 shadow overflow-hidden">
+        <ul class="text-sm text-gray-200" aria-labelledby="dropdownDefaultButton">
+            <li *ngFor="let item of menuItems" class="mb-1">
+                <button class="w-full flex flex-row gap-x-2 items-center p-1 text-xs rounded-sm hover:bg-zinc-900"
+                    (click)="executeAction(item.action)">
+                    <ng-container *ngComponentOutlet="item.icon"></ng-container>
+                    {{ item.label }}
+                </button>
+            </li>
+        </ul>
+    </div>
+</button>

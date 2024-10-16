@@ -1,41 +1,41 @@
-<header class="flex items-center justify-between border-b border-b-[#292e38] px-10 py-3">
+<header class="flex items-center justify-between border-b border-b-[#292e38] px-6 py-3 lg:px-10">
     <div class="flex items-center gap-4 text-white">
-        <div class="size-4">
+        <div class="w-8 h-8">
             <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M44 4H30.6666V17.3334H17.3334V30.6666H4V44H44V4Z" fill="currentColor"></path>
             </svg>
         </div>
-        <h2 class="text-lg font-bold">Oceanfleet</h2>
+        <a href="/" class="text-lg font-bold">Oceanfleet</a>
     </div>
-    <nav class="flex flex-1 justify-end gap-8">
-        <div class="flex items-center gap-9">
-            <a class="text-sm font-medium text-white" href="#">Overview</a>
-            <a class="text-sm font-medium text-white" href="#">Vessels</a>
-            <a class="text-sm font-medium text-white" href="#">Fleets</a>
-            <a class="text-sm font-medium text-white" href="#">Insights</a>
-        </div>
-        <div class="flex gap-2">
-            <button
-                class="flex items-center justify-center h-10 px-2.5 bg-[#292e38] text-white rounded-xl cursor-pointer">
-                <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" fill="currentColor"
-                    viewBox="0 0 256 256">
-                    <path
-                        d="M221.8,175.94C216.25,166.38,208,139.33,208,104a80,80,0,1,0-160,0c0,35.34-8.26,62.38-13.81,71.94A16,16,0,0,0,48,200H88.81a40,40,0,0,0,78.38,0H208a16,16,0,0,0,13.8-24.06ZM128,216a24,24,0,0,1-22.62-16h45.24A24,24,0,0,1,128,216ZM48,184c7.7-13.24,16-43.92,16-80a64,64,0,1,1,128,0c0,36.05,8.28,66.73,16,80Z">
-                    </path>
-                </svg>
-            </button>
-            <button
-                class="flex items-center justify-center h-10 px-2.5 bg-[#292e38] text-white rounded-xl cursor-pointer">
-                <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" fill="currentColor"
-                    viewBox="0 0 256 256">
-                    <path
-                        d="M140,180a12,12,0,1,1-12-12A12,12,0,0,1,140,180ZM128,72c-22.06,0-40,16.15-40,36v4a8,8,0,0,0,16,0v-4c0-11,10.77-20,24-20s24,9,24,20-10.77,20-24,20a8,8,0,0,0-8,8v8a8,8,0,0,0,16,0v-.72c18.24-3.35,32-17.9,32-35.28C168,88.15,150.06,72,128,72Zm104,56A104,104,0,1,1,128,24,104.11,104.11,0,0,1,232,128Zm-16,0a88,88,0,1,0-88,88A88.1,88.1,0,0,0,216,128Z">
-                    </path>
-                </svg>
-            </button>
-        </div>
-        <div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-10"
-            style='background-image: url("https://cdn.usegalileo.ai/sdxl10/8f64d8b1-d388-4c16-84c8-df1da0e7ccaa.png");'
-            alt="User Profile"></div>
+
+    <nav class="hidden md:flex flex-1 justify-center gap-6 lg:gap-8">
+        <a class="text-sm font-medium text-white" href="/">Dashboard</a>
+        <a class="text-sm font-medium text-white" href="/ship-list">Buques</a>
     </nav>
+
+    <div class="flex items-center gap-4">
+        <div class="w-full sm:w-auto" *ngIf="!isLoggedIn">
+            <select id="role" name="role" [(ngModel)]="selectedRole"
+                class="block w-full rounded-md border-2 border-gray-700 py-1 text-gray-300 bg-gray-950 shadow-sm focus:ring-emerald-500 sm:max-w-xs sm:text-sm">
+                <option class="text-gray-400" value="" disabled>Select Role</option>
+                <option *ngFor="let role of roles" [value]="role" class="text-gray-200">{{ role }}</option>
+            </select>
+        </div>
+
+        <div *ngIf="isLoggedIn" class="text-white text-sm font-medium">
+            {{ user?.name }} ({{ user?.role }})
+        </div>
+
+        <button (click)="toggleLogin()"
+            class="bg-emerald-500 hover:bg-emerald-600 text-white text-sm px-4 py-1 rounded shadow-2xl transition-all">
+            {{ isLoggedIn ? 'Logout' : 'Login' }}
+        </button>
+
+        <div class="flex items-center space-x-1"
+            [ngClass]="{'text-emerald-500': isLoggedIn, 'text-red-500': !isLoggedIn}">
+            <span class="text-sm font-medium">{{ isLoggedIn ? 'Connected' : 'Disconnected' }}</span>
+            <app-icon-rocket></app-icon-rocket>
+        </div>
+    </div>
+
 </header>

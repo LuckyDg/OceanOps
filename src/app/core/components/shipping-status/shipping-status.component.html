@@ -1,0 +1,43 @@
+<div class="max-w-2xl mx-auto mt-8 p-6 border border-gray-700 rounded-lg shadow-lg animate-in">
+    <h2 class="text-lg font-semibold mb-6 text-gray-300">Estado de Entrega</h2>
+    <div class="relative">
+        <div class="flex flex-col space-y-6">
+            <!-- Paso 1: Departed -->
+            <div class="flex flex-col items-start">
+                <div class="flex items-center space-x-2">
+                    <app-icon-map class="text-emerald-500"></app-icon-map>
+                    <div class="text-base font-medium text-emerald-400">Departed</div>
+                </div>
+                <p class="ml-7 text-sm text-gray-400">Left port on {{ departureDate }}</p>
+            </div>
+
+            <!-- Paso 2: In Transit -->
+            <div class="flex flex-col items-start">
+                <div class="flex items-center space-x-2">
+                    <app-icon-map class="text-emerald-500"></app-icon-map>
+                    <div class="text-base font-medium text-emerald-400">In Transit</div>
+                </div>
+                <p class="ml-7 text-sm text-gray-400">Estimated arrival: {{ estimatedArrivalDate }}</p>
+            </div>
+
+            <!-- Paso 3: Arrival -->
+            <div class="flex flex-col items-start">
+                <div class="flex items-center space-x-2">
+                    <app-icon-map class="text-emerald-500"></app-icon-map>
+                    <div class="text-base font-medium text-emerald-400">Arrival</div>
+                </div>
+                <p class="ml-7 text-sm text-gray-400">Expected at destination port</p>
+            </div>
+        </div>
+
+    </div>
+
+    <p class="text-gray-400 mt-6 ml-2 text-sm">{{ statusMessage }}</p>
+
+    <!-- Contenedor de entrega estimada -->
+    <div class="mt-6 p-2 rounded-md">
+        <p class="text-sm text-emerald-500">
+            <span class="font-medium">Fecha estimada de entrega:</span> {{ estimatedDelivery }}
+        </p>
+    </div>
+</div>

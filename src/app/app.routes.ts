@@ -1,9 +1,13 @@
 import { Routes } from '@angular/router';
-import { FleetSummaryComponent } from './fleet-summary/fleet-summary.component';
-import { FleetShipComponent } from './core/components/fleet-ship/fleet-ship.component';
+import { ShipListComponent } from './pages/ship-list/ship-list.component';
+import { FleetSummaryComponent } from './pages/fleet-summary/fleet-summary.component';
+import { ReportComponent } from './pages/report/report.component';
+import { AuthGuard } from './guards/auth.guard';
 
 export const routes: Routes = [
     { path: '', component: FleetSummaryComponent },
-    { path: 'fleetship', component: FleetShipComponent },
+    { path: 'dashboard', component: FleetSummaryComponent, canActivate: [AuthGuard] },
+    { path: 'ship-list', component: ShipListComponent, canActivate: [AuthGuard] },
+    { path: 'report/:id', component: ReportComponent },
     { path: '**', redirectTo: '' }
 ];

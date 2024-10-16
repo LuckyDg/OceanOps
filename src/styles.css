@@ -1,1 +1,28 @@
 /* You can add global styles to this file, and also import other style files */
+/* Mantén los estilos actuales, pero agrega algunos ajustes para la responsividad */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+.grid {
+  grid-template-columns: 1fr;
+}
+
+@media (min-width: 1024px) {
+  .grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.cursor-pointer {
+  cursor: pointer;
+}
+
+svg.my-icon {
+  width: 20px;
+  height: 20px;
+  stroke-width: 3;
+}
+
+main {
+  flex: 1;
+}
