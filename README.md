@@ -1,28 +1,118 @@
-# OceanOps
+# Aplicación de Gestión de Flotas (OceanOps)
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.2.1.
+Este Proyecto esta generado con [Angular CLI](https://github.com/angular/angular-cli) version 18.2.1.
 
-## Development server
+La Aplicación de Gestión de Flotas es una web desarrollada con Angular con el proposito de practicar github actions y para ayudar a gestionar operaciones de flotas rastreando barcos y sus contenedores. Ofrece funcionalidades como la generación de reportes en PDF, mostrar detalles de los contenedores basados en los roles de usuario, y gestionar sesiones de inicio/cierre de sesión. Utiliza Sonner para notificaciones y Jest para pruebas unitarias esta aplicacion esta en desarrollo.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+## Tabla de Contenidos
 
-## Code scaffolding
+- [Características](#características)
+- [Tecnologías](#tecnologías)
+- [Instalación](#instalación)
+- [Configuración](#configuración)
+- [Ejecución de la Aplicación](#ejecución-de-la-aplicación)
+- [Pruebas](#pruebas)
+- [Licencia](#licencia)
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+## Características
 
-## Build
+- **Gestión de Barcos:** Ver y gestionar barcos en una interfaz responsiva con tarjetas.
+- **Detalles de Contenedores:** Mostrar información de los contenedores con detalles expandibles al hacer clic.
+- **Generación de Reportes en PDF:** Generar reportes descargables en PDF usando jsPDF y html2canvas.
+- **Control de Acceso Basado en Roles:** Los administradores pueden ver detalles adicionales de los contenedores.
+- **Gestión de Sesiones:** Iniciar y cerrar sesión con notificaciones de éxito o error mediante Sonner.
+- **Notificaciones:** Toasts para dar retroalimentación de acciones clave.
+- **Pruebas:** Pruebas unitarias y end-to-end usando Jest y Cypress.
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+## Tecnologías
 
-## Running unit tests
+- **Angular 18:** Framework frontend para construir la interfaz web.
+- **TypeScript:** Usado para escribir código JavaScript tipado.
+- **Jest:** Para pruebas unitarias.
+- **Sonner:** Para notificaciones tipo toast.
+- **jsPDF & html2canvas:** Usados para generar y descargar reportes en formato PDF.
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+## Instalación
 
-## Running end-to-end tests
+Requisitos Previos
+Asegúrate de tener instalado lo siguiente en tu máquina:
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+- **Node.js** (versión 18+)
+- **Angular CLI** (versión 18+)
+- **Git**
 
-## Further help
+### Clonar el Repositorio
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
-# OceanOps
+```bash
+git clone https://github.com/tu-usuario/fleet-management-app.git
+cd fleet-management-app
+```
+
+### Instalar Dependencias
+
+```bash
+npm install
+```
+
+## Configuración
+
+La aplicación utiliza JSON como backend simulado para los datos de los usuarios y los contenedores. Si deseas modificar o extender los datos simulados, puedes encontrar los archivos JSON en la carpeta `src/assets/`.
+
+## Ejecución de la Aplicación
+
+Para ejecutar la aplicación localmente, usa el siguiente comando:
+
+```bash
+ng serve
+```
+
+Esto iniciará la aplicación en [http://localhost:4200](http://localhost:4200).
+
+### Compilar
+
+Para compilar el proyecto para producción, ejecuta:
+
+```bash
+ng build
+```
+
+Los archivos de compilación se almacenarán en el directorio `dist/`.
+
+## Pruebas
+
+El proyecto incluye tanto pruebas unitarias para garantizar la calidad del código.
+
+### Ejecutar Pruebas Unitarias
+
+Las pruebas unitarias están escritas con Jest. Para ejecutarlas, usa el siguiente comando:
+
+```bash
+Copiar código
+npm run test
+```
+
+## Notificaciones con Sonner
+
+Para notificar al usuario sobre eventos importantes, como el inicio de sesión exitoso o un error al generar un reporte, se usa el componente Sonner. Aquí un ejemplo en el código:
+
+```typescript
+this.toastService.toastSuccess("¡Sesión iniciada exitosamente!");
+```
+
+## Licencia
+
+Este proyecto está licenciado bajo la Licencia MIT - mira el archivo LICENSE para más detalles.
+
+### Mejoras Futuras
+
+- **Integración con API:** Reemplazar los datos simulados con una API real.
+- **Gestión de Roles:** Extender el control de acceso basado en roles para mayor granularidad.
+- **Mejoras en Rendimiento:** Optimizar la generación de PDF para grandes reportes.
+
+Autor
+
+- [LuckyDg](https://github.com/LuckyDg)
+
+### Contribuciones
+
+Las contribuciones son bienvenidas. Para cambios mayores, por favor abre un issue primero para discutir lo que te gustaría cambiar.
