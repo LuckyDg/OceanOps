@@ -51,7 +51,6 @@ export class ShipListComponent {
     });
   }
   viewReports(vesselId: string): void {
-    console.log('Navegando a reportes del barco con ID:', vesselId);
     this.router.navigate(['/report', vesselId]);
   }
 
@@ -71,8 +70,11 @@ export class ShipListComponent {
   }
 
   onSearchInput(event: Event): void {
-    const input = event.target as HTMLInputElement;
-    this.searchQuery.next(input.value);
+    const query = (event.target as HTMLInputElement).value.toLowerCase();
+    this.sortedVessels = this.vessels.filter(vessel =>
+      vessel.name.toLowerCase().includes(query)
+    );
   }
+
 
 }

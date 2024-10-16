@@ -78,48 +78,21 @@ export class ReportComponent {
     this.invoiceNumber = `INV${randomNumber}-08-${randomSuffix}`;
   }
 
-  generatePDF(): void {
-    const data = document.getElementById('preview');
-    const downloadButton = document.querySelector('button');
-
-    if (data) {
-      if (downloadButton) {
-        downloadButton.style.display = 'none';
-      }
-
-      html2canvas(data, { scale: 2 }).then((canvas) => {
-        const imgData = canvas.toDataURL('image/png');
-        const pdf = new jsPDF();
-        const imgWidth = 190;
-        const pageHeight = pdf.internal.pageSize.height;
-        const imgHeight = (canvas.height * imgWidth) / canvas.width;
-        let heightLeft = imgHeight;
-
-        let position = 0;
-
-        pdf.addImage(imgData, 'PNG', 10, position, imgWidth, imgHeight);
-        heightLeft -= pageHeight;
-
-        while (heightLeft >= 0) {
-          position = heightLeft - imgHeight;
-          pdf.addPage();
-          pdf.addImage(imgData, 'PNG', 10, position, imgWidth, imgHeight);
-          heightLeft -= pageHeight;
-        }
-
-        pdf.save(`${this.invoiceNumber}.pdf`);
-
-        if (downloadButton) {
-          downloadButton.style.display = 'flex';
-        }
-      }).catch(error => {
-        console.error('Error generando PDF:', error);
-        if (downloadButton) {
-          downloadButton.style.display = 'flex';
-        }
-      });
-    } else {
-      console.error('Elemento con ID "preview" no encontrado.');
+  async generatePDF(): Promise<void> {
+    const previewElement = document.getElementById('preview');
+    if (!previewElement) {
+      throw new Error("Preview element not found");
     }
+
+    const canvas = await html2canvas(previewElement, { scale: 2 });
+    const imgData = canvas.toDataURL('image/png');
+    const pdf = new jsPDF();
+    const pdfWidth = pdf.internal.pageSize.width; // Cambiado a width
+    const pdfHeight = (canvas.height * pdfWidth) / canvas.width;
+
+    pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight);
+    pdf.save(`${this.invoiceNumber}.pdf`);
   }
+
+
 }
