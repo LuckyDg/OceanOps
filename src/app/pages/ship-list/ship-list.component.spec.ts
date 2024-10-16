@@ -4,6 +4,7 @@ import { ShippingService } from '../../service/shipping.service';
 import { Router } from '@angular/router';
 import { of } from 'rxjs';
 import { ChangeDetectorRef } from '@angular/core';
+import { ToastNotificationService } from '../../service/toast-notification.service';
 
 // Mock de ShippingService
 class MockShippingService {
@@ -11,6 +12,12 @@ class MockShippingService {
         { id: '1', name: 'Barco A' },
         { id: '2', name: 'Barco B' },
     ]));
+}
+
+// Mock de ToastNotificationService
+class MockToasNotificationService {
+    toastSuccess = jest.fn();
+    toastError = jest.fn();
 }
 
 class MockRouter {
@@ -21,6 +28,7 @@ describe('ShipListComponent', () => {
     let component: ShipListComponent;
     let fixture: ComponentFixture<ShipListComponent>;
     let shippingService: MockShippingService;
+    let toastService: MockToasNotificationService;
     let router: MockRouter;
 
     beforeEach(() => {
@@ -31,6 +39,7 @@ describe('ShipListComponent', () => {
             imports: [ShipListComponent],
             providers: [
                 { provide: ShippingService, useValue: shippingService },
+                { provide: ToastNotificationService, useValue: toastService },
                 { provide: Router, useValue: router },
                 { provide: ChangeDetectorRef, useValue: { markForCheck: jest.fn() } },
             ],

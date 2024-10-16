@@ -12,6 +12,4 @@ import { ToastSonnerComponent } from './core/components/toast-sonner/toast-sonne
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
-export class AppComponent {
-  title = 'OceanOps';
-}
+export class AppComponent { }
