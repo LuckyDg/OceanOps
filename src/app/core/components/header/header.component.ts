@@ -4,6 +4,7 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { AuthService } from '../../../auth/auth.service';
 import { FormsModule } from '@angular/forms';
 import { User } from '../../../models/user.model';
+import { ToastNotificationService } from '../../../service/toast-notification.service';
 @Component({
   selector: 'app-header',
   standalone: true,
@@ -22,7 +23,7 @@ export class HeaderComponent {
   selectedRole: string = '';
   user: User | null = null;
 
-  constructor(private readonly authService: AuthService) {
+  constructor(private readonly authService: AuthService, private readonly toastService: ToastNotificationService) {
     this.authService.user$.subscribe(user => {
       this.user = user;
     });
@@ -35,8 +36,15 @@ export class HeaderComponent {
   toggleLogin() {
     if (this.isLoggedIn) {
       this.authService.logout();
+      this.toastService.toastSuccess('Successfully logged out!');
     } else {
-      this.authService.login(this.selectedRole);
+      try {
+        this.authService.login(this.selectedRole);
+        this.toastService.toastSuccess('Successfully logged in!');
+      } catch (error) {
+        this.toastService.toastError('Login failed. Please try again.');
+      }
     }
   }
+
 }
