@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { CircleDotIconComponent } from '@core/icons/circle-dot';
 import { CommonModule } from '@angular/common';
 import { ContainerIconComponent } from '@core/icons/container';
-import { IconMapComponent } from '@core/icons/map';
+import { LucideAngularModule , MapPin } from 'lucide-angular';
 
 @Component({
   selector: 'app-shipping-status',
@@ -11,12 +11,13 @@ import { IconMapComponent } from '@core/icons/map';
     CommonModule,
     ContainerIconComponent,
     CircleDotIconComponent,
-    IconMapComponent,
+    LucideAngularModule
   ],
   templateUrl: './shipping-status.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ShippingStatusComponent {
+  mapPin = MapPin;
   @Input() currentStep: number = 0;
 
   departureDate: string = '2023-06-01';

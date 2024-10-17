@@ -1,12 +1,17 @@
-name: CI/CD Pipeline for Angular
+name: CI/CD Pipeline for Angular with Vercel
+
+env:
+  VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+  VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
 
 on:
   push:
     branches:
       - main
+      - '**' # Para que funcione con todas las ramas
   pull_request:
     branches:
-      - main
+      - '**'
 
 jobs:
   pre-job:
@@ -25,7 +30,7 @@ jobs:
 
   lint:
     runs-on: ubuntu-latest
-    needs: pre-job # Depende del pre-job
+    needs: pre-job
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
@@ -43,7 +48,7 @@ jobs:
 
   build:
     runs-on: ubuntu-latest
-    needs: lint # Dependencia del lint job
+    needs: lint
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
@@ -61,7 +66,7 @@ jobs:
 
   test:
     runs-on: ubuntu-latest
-    needs: build # Depende de que el job de build haya terminado
+    needs: build
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
@@ -79,19 +84,34 @@ jobs:
 
   deploy:
     runs-on: ubuntu-latest
-    needs: test # Depende de que el job de test haya pasado
+    needs: test
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Set up Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: '18'
+      - name: Install Vercel CLI
+        run: npm install --global vercel
 
-      - name: Install dependencies
-        run: npm install
-
-      - name: Deploy to production
+      - name: Pull Vercel Environment Information
         run: |
-          echo "Deploying to production server..."
+          if [ "${{ github.ref }}" == "refs/heads/main" ]; then
+            vercel pull --yes --environment=production --token=${{ secrets.VERCEL_TOKEN }}
+          else
+            vercel pull --yes --environment=preview --token=${{ secrets.VERCEL_TOKEN }}
+          fi
+
+      - name: Build Project Artifacts
+        run: |
+          if [ "${{ github.ref }}" == "refs/heads/main" ]; then
+            vercel build --prod --token=${{ secrets.VERCEL_TOKEN }}
+          else
+            vercel build --token=${{ secrets.VERCEL_TOKEN }}
+          fi
+
+      - name: Deploy Project Artifacts
+        run: |
+          if [ "${{ github.ref }}" == "refs/heads/main" ]; then
+            vercel deploy --prebuilt --prod --token=${{ secrets.VERCEL_TOKEN }}
+          else
+            vercel deploy --prebuilt --token=${{ secrets.VERCEL_TOKEN }}
+          fi

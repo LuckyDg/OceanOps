@@ -15,7 +15,6 @@ export * from './icons/circle-dot';
 export * from './icons/container';
 export * from './icons/download';
 export * from './icons/filter';
-export * from './icons/map';
 export * from './icons/pdf';
 export * from './icons/report';
 export * from './icons/rocket';
