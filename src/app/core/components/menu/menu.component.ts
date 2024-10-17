@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { IconSettingsComponent } from '@core/icons/settings'
+import { IconSettingsComponent } from '@core/icons/settings';
 
 export interface MenuItem {
   label: string;

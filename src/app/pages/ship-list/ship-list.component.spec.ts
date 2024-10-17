@@ -11,7 +11,7 @@ class MockShippingService {
   getVessels = jest.fn().mockReturnValue(
     of([
       { id: '1', name: 'Barco A' },
-      { id: '2', name: 'Barco B' }, 
+      { id: '2', name: 'Barco B' },
     ])
   );
 }
