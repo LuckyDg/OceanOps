@@ -44,8 +44,8 @@ Asegúrate de tener instalado lo siguiente en tu máquina:
 ### Clonar el Repositorio
 
 ```bash
-git clone https://github.com/tu-usuario/fleet-management-app.git
-cd fleet-management-app
+git clone https://github.com/LuckyDg/OceanOps.git
+cd OceanOps
 ```
 
 ### Instalar Dependencias
@@ -101,7 +101,7 @@ this.toastService.toastSuccess('¡Sesión iniciada exitosamente!');
 
 ## Licencia
 
-Este proyecto está licenciado bajo la Licencia MIT - mira el archivo LICENSE para más detalles.
+Este proyecto está licenciado bajo la Licencia MIT - mira el archivo [LICENSE](https://github.com/LuckyDg/OceanOps/blob/main/LICENSE) para más detalles.
 
 ### Mejoras Futuras
 
