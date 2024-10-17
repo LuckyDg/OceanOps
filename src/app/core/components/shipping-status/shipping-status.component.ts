@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { CircleDotIconComponent } from '@core/icons/circle-dot';
 import { CommonModule } from '@angular/common';
 import { ContainerIconComponent } from '@core/icons/container';
-import { LucideAngularModule , MapPin } from 'lucide-angular';
+import { LucideAngularModule, MapPin } from 'lucide-angular';
 
 @Component({
   selector: 'app-shipping-status',
@@ -11,7 +11,7 @@ import { LucideAngularModule , MapPin } from 'lucide-angular';
     CommonModule,
     ContainerIconComponent,
     CircleDotIconComponent,
-    LucideAngularModule
+    LucideAngularModule,
   ],
   templateUrl: './shipping-status.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
