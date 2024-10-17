@@ -116,5 +116,3 @@ Autor
 ### Contribuciones
 
 Las contribuciones son bienvenidas. Para cambios mayores, por favor abre un issue primero para discutir lo que te gustaría cambiar.
-
-Nota: Falta arreglar el testing para que corra con alias y tambien falta despliegue a vercel
