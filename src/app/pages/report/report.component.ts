@@ -1,16 +1,23 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component } from '@angular/core';
-import { ContainerIcon } from "../../core/icons/container";
+import {
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  Component,
+  OnInit,
+} from '@angular/core';
 import { jsPDF } from 'jspdf';
 import html2canvas from 'html2canvas';
-import { ShippingStatusComponent } from "../../core/components/shipping-status/shipping-status.component";
-import { ReportIcon } from "../../core/icons/report";
-import { IconDownload } from "../../core/icons/download";
-import { IconPdf } from "../../core/icons/pdf";
-import { ShippingService } from '../../service/shipping.service';
-import { Container, Vessel } from '../../models/buques.model';
+import { ShippingStatusComponent } from '@core/components/shipping-status/shipping-status.component';
+import { ShippingService } from '@services/shipping.service';
+import { Container, Vessel } from '@models/buques.model';
 import { ActivatedRoute } from '@angular/router';
-import { ToastNotificationService } from '../../service/toast-notification.service';
+import { ToastNotificationService } from '@services/toast-notification.service';
+import {
+  ContainerIconComponent,
+  ReportIconComponent,
+  IconDownloadComponent,
+  IconPdfComponent,
+} from '@core/index';
 
 interface Capitan {
   id?: string;
@@ -25,16 +32,16 @@ interface Capitan {
   standalone: true,
   imports: [
     CommonModule,
-    ContainerIcon,
     ShippingStatusComponent,
-    ReportIcon,
-    IconDownload,
-    IconPdf
+    ContainerIconComponent,
+    ReportIconComponent,
+    IconDownloadComponent,
+    IconPdfComponent,
   ],
   templateUrl: './report.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ReportComponent {
+export class ReportComponent implements OnInit {
   containers: Container[] = [];
   selectedContainer: Container | null = null;
   isAdmin: boolean = true;
@@ -43,8 +50,20 @@ export class ReportComponent {
   currentStepValue: number = 1;
 
   capitans: Capitan[] = [
-    { id: '0232954', name: 'Diana Ramirez', matricula: 'XX-23111-BM', email: '', address: '' },
-    { id: '0232955', name: 'María Gómez', matricula: 'XX-23112-BM', email: '', address: '' },
+    {
+      id: '0232954',
+      name: 'Diana Ramirez',
+      matricula: 'XX-23111-BM',
+      email: '',
+      address: '',
+    },
+    {
+      id: '0232955',
+      name: 'María Gómez',
+      matricula: 'XX-23112-BM',
+      email: '',
+      address: '',
+    },
   ];
 
   constructor(
@@ -52,7 +71,7 @@ export class ReportComponent {
     private readonly route: ActivatedRoute,
     private readonly cd: ChangeDetectorRef,
     private readonly toastService: ToastNotificationService
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     this.vesselId = this.route.snapshot.paramMap.get('id');
@@ -62,7 +81,9 @@ export class ReportComponent {
 
   getContainers(): void {
     this.shippingService.getVessels().subscribe((vessels: Vessel[]) => {
-      const selectedVessel = vessels.find(vessel => vessel.id === this.vesselId);
+      const selectedVessel = vessels.find(
+        vessel => vessel.id === this.vesselId
+      );
       if (selectedVessel) {
         this.containers = selectedVessel.containers;
         this.cd.markForCheck();
@@ -84,7 +105,7 @@ export class ReportComponent {
     try {
       const previewElement = document.getElementById('preview');
       if (!previewElement) {
-        throw new Error("Preview element not found");
+        throw new Error('Preview element not found');
       }
 
       const canvas = await html2canvas(previewElement, { scale: 2 });
@@ -101,5 +122,4 @@ export class ReportComponent {
       this.toastService.toastError('Failed to generate the PDF.');
     }
   }
-
 }

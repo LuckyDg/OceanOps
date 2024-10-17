@@ -1,17 +1,17 @@
-import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
-import { ContainerIcon } from "../../icons/container";
-import { CircleDotIcon } from "../../icons/circle-dot";
-import { IconMap } from "../../icons/map";
+import { CircleDotIconComponent } from '@core/icons/circle-dot';
+import { CommonModule } from '@angular/common';
+import { ContainerIconComponent } from '@core/icons/container';
+import { IconMapComponent } from '@core/icons/map';
 
 @Component({
   selector: 'app-shipping-status',
   standalone: true,
   imports: [
     CommonModule,
-    ContainerIcon,
-    CircleDotIcon,
-    IconMap
+    ContainerIconComponent,
+    CircleDotIconComponent,
+    IconMapComponent,
   ],
   templateUrl: './shipping-status.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -45,6 +45,11 @@ export class ShippingStatusComponent {
   get estimatedDelivery(): string {
     const today = new Date();
     const deliveryDate = new Date(today.setDate(today.getDate() + 7));
-    return deliveryDate.toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
+    return deliveryDate.toLocaleDateString('en-US', {
+      weekday: 'long',
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric',
+    });
   }
 }

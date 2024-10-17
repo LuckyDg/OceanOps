@@ -1,12 +1,15 @@
 import { Injectable } from '@angular/core';
 import { CanActivate, Router } from '@angular/router';
-import { AuthService } from '../auth/auth.service';
+import { AuthService } from '@services/auth.service';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AuthGuard implements CanActivate {
-  constructor(private readonly authService: AuthService, private readonly router: Router) { }
+  constructor(
+    private readonly authService: AuthService,
+    private readonly router: Router
+  ) {}
 
   canActivate(): boolean {
     const user = this.authService.getUser();
@@ -16,7 +19,8 @@ export class AuthGuard implements CanActivate {
         return true; // Admin y Manager tienen acceso total
       } else if (user.role === 'viewer') {
         // Solo permitir acceso al dashboard para el rol viewer
-        const currentRoute = this.router.routerState.snapshot.root.firstChild?.routeConfig?.path;
+        const currentRoute =
+          this.router.routerState.snapshot.root.firstChild?.routeConfig?.path;
         if (currentRoute === 'dashboard') {
           return true;
         }

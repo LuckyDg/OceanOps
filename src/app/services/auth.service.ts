@@ -1,17 +1,16 @@
 import { Inject, Injectable, PLATFORM_ID } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
-import { User } from '../models/user.model';
+import { User } from '@models/user.model';
 import { isPlatformBrowser } from '@angular/common';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AuthService {
-
   private readonly users: User[] = [
     { name: 'Admin User', role: 'admin' },
     { name: 'Manager User', role: 'manager' },
-    { name: 'Viewer User', role: 'viewer' }
+    { name: 'Viewer User', role: 'viewer' },
   ];
 
   private loggedUser: User | null = null;

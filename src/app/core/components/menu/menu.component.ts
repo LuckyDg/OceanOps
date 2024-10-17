@@ -1,25 +1,17 @@
-import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
-
-import {
-  IconSettings,
-  IconDelete,
-  IconEdit,
-  IconMore,
-} from '../../index';
+import { CommonModule } from '@angular/common';
+import { IconSettingsComponent } from '@core/icons/settings'
 
 export interface MenuItem {
   label: string;
-  icon: any;
+  icon?: any;
   action: () => void;
 }
 
 @Component({
   selector: 'app-menu',
   standalone: true,
-  imports: [
-    CommonModule, IconSettings, IconDelete, IconEdit, IconMore
-  ],
+  imports: [CommonModule, IconSettingsComponent],
   templateUrl: './menu.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

@@ -1,22 +1,29 @@
 <div class="flex flex-col space-y-4 mt-4 rounded-lg">
-    <div class="flex justify-between p-4 space-x-2 items-center">
-        <input type="text"
-            class="w-full rounded-md border text-gray-50 border-gray-700 bg-transparent px-3 py-1 text-sm"
-            placeholder="Search..." (input)="onSearchInput($event)" />
-    </div>
+  <div class="flex justify-between p-4 space-x-2 items-center">
+    <input
+      type="text"
+      class="w-full rounded-md border text-gray-50 border-gray-700 bg-transparent px-3 py-1 text-sm"
+      placeholder="Search..."
+      (input)="onSearchInput($event)" />
+  </div>
 
-    <div class="grid grid-cols-[repeat(auto-fit,minmax(158px,1fr))] gap-4 p-4 lg:grid-cols-5">
-        <div *ngFor="let vessel of sortedVessels" class="border border-gray-700 p-4 rounded-2xl flex-1">
-            <div class="flex flex-col items-center">
-                <app-icon-container class="text-gray-300"></app-icon-container>
-                <h4 class="text-gray-300 mb-2 font-bold">{{ vessel.name }}</h4>
-                <p class="text-xs font-medium text-emerald-500 mb-2">{{ vessel.id }}</p>
-                <div class="flex space-x-4">
-                    <a class="text-gray-400 hover:text-emerald-700" (click)="viewReports(vessel.id)">
-                        <app-icon-report class="size-6 w-6 h-6"></app-icon-report>
-                    </a>
-                </div>
-            </div>
+  <div
+    class="grid grid-cols-[repeat(auto-fit,minmax(158px,1fr))] gap-4 p-4 lg:grid-cols-5">
+    <div
+      *ngFor="let vessel of sortedVessels"
+      class="border border-gray-700 p-4 rounded-2xl flex-1">
+      <div class="flex flex-col items-center">
+        <app-icon-container class="text-gray-300"></app-icon-container>
+        <h4 class="text-gray-300 mb-2 font-bold">{{ vessel.name }}</h4>
+        <p class="text-xs font-medium text-emerald-500 mb-2">{{ vessel.id }}</p>
+        <div class="flex space-x-4">
+          <a
+            class="text-gray-400 hover:text-emerald-700"
+            (click)="viewReports(vessel.id)">
+            <app-icon-report class="size-6 w-6 h-6"></app-icon-report>
+          </a>
         </div>
+      </div>
     </div>
+  </div>
 </div>

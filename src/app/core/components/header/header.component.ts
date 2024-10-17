@@ -1,29 +1,29 @@
-import { IconRocket } from './../../icons/rocket';
-import { CommonModule } from '@angular/common';
+import { AuthService } from '@services/auth.service';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { AuthService } from '../../../auth/auth.service';
+import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { User } from '../../../models/user.model';
-import { ToastNotificationService } from '../../../service/toast-notification.service';
+import { IconRocketComponent } from '@core/icons/rocket';
+import { ToastNotificationService } from '@services/toast-notification.service';
+import { User } from '@models/user.model';
+
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [
-    CommonModule,
-    IconRocket,
-    FormsModule,
-  ],
+  imports: [CommonModule, IconRocketComponent, FormsModule],
   templateUrl: './header.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HeaderComponent {
-  IconRocket = IconRocket;
+  IconRocket = IconRocketComponent;
 
   roles = ['admin', 'manager', 'viewer'];
   selectedRole: string = '';
   user: User | null = null;
 
-  constructor(private readonly authService: AuthService, private readonly toastService: ToastNotificationService) {
+  constructor(
+    private readonly authService: AuthService,
+    private readonly toastService: ToastNotificationService
+  ) {
     this.authService.user$.subscribe(user => {
       this.user = user;
     });
@@ -46,5 +46,4 @@ export class HeaderComponent {
       }
     }
   }
-
 }

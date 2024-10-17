@@ -10,15 +10,14 @@ export * from './components/vessel-card/vessel-card.component';
 
 /* Icons */
 export * from './icons/check';
+export * from './icons/chevron-down';
 export * from './icons/circle-dot';
 export * from './icons/container';
-export * from './icons/delete';
-export * from './icons/details';
-export * from './icons/docker';
-export * from './icons/edit';
-export * from './icons/filter-status';
+export * from './icons/download';
 export * from './icons/filter';
-export * from './icons/more';
+export * from './icons/map';
+export * from './icons/pdf';
 export * from './icons/report';
+export * from './icons/rocket';
 export * from './icons/settings';
 export * from './icons/ship';

@@ -1,35 +1,63 @@
 <section class="flex flex-col max-w-full flex-1">
-    <h2 class="p-4 text-white tracking-light text-2xl font-bold leading-tight">Resumen de Flota</h2>
+  <h2 class="p-4 text-white tracking-light text-2xl font-bold leading-tight">
+    Resumen de Flota
+  </h2>
 
-    <div class="grid grid-cols-[repeat(auto-fit,minmax(158px,1fr))] gap-3 p-4 lg:grid-cols-4">
-        <app-vessel-card></app-vessel-card>
-        <app-container-card></app-container-card>
-        <app-use-card></app-use-card>
-        <app-report-card></app-report-card>
+  <div
+    class="grid grid-cols-[repeat(auto-fit,minmax(158px,1fr))] gap-3 p-4 lg:grid-cols-4">
+    <app-vessel-card></app-vessel-card>
+    <app-container-card></app-container-card>
+    <app-use-card></app-use-card>
+    <app-report-card></app-report-card>
+  </div>
+
+  <h2
+    class="text-white text-xl font-bold leading-tight tracking-[-0.015em] px-4 pb-3 pt-5">
+    Activity
+  </h2>
+
+  <div
+    class="grid grid-cols-[repeat(auto-fit,minmax(158px,1fr))] gap-3 p-4 lg:grid-cols-3">
+    <div class="flex flex-col gap-3 pb-3">
+      <div
+        class="w-full bg-center bg-no-repeat aspect-square bg-cover rounded-xl">
+        <img
+          ngSrc="assets/trafico.webp"
+          alt="Trafico"
+          width="400"
+          height="400"
+          loading="lazy"
+          class="rounded-lg" />
+        <p class="text-white text-base font-medium leading-normal">Trafico</p>
+      </div>
     </div>
-
-    <h2 class="text-white text-xl font-bold leading-tight tracking-[-0.015em] px-4 pb-3 pt-5">Activity</h2>
-
-    <div class="grid grid-cols-[repeat(auto-fit,minmax(158px,1fr))] gap-3 p-4 lg:grid-cols-3">
-        <div class="flex flex-col gap-3 pb-3">
-            <div class="w-full bg-center bg-no-repeat aspect-square bg-cover rounded-xl">
-                <img ngSrc="assets/trafico.webp" alt="Trafico" width="400" height="400" loading="lazy"
-                    class="rounded-lg">
-                <p class="text-white text-base font-medium leading-normal">Trafico</p>
-            </div>
-        </div>
-        <div class="flex flex-col gap-3 pb-3">
-            <div class="w-full bg-center bg-no-repeat aspect-square bg-cover rounded-xl">
-                <img ngSrc="assets/covertura.webp" alt="Trafico" width="400" height="400" priority class="rounded-lg">
-                <p class="text-white text-base font-medium leading-normal">Cobertura AIS</p>
-            </div>
-        </div>
-        <div class="flex flex-col gap-3 pb-3">
-            <div class="w-full bg-center bg-no-repeat aspect-square bg-cover rounded-xl">
-                <img ngSrc="assets/escalas.webp" alt="Trafico" width="400" height="400" loading="lazy"
-                    class="rounded-lg">
-                <p class="text-white text-base font-medium leading-normal">Escalas</p>
-            </div>
-        </div>
+    <div class="flex flex-col gap-3 pb-3">
+      <div
+        class="w-full bg-center bg-no-repeat aspect-square bg-cover rounded-xl">
+        <img
+          ngSrc="assets/covertura.webp"
+          alt="Trafico"
+          width="400"
+          height="400"
+          priority
+          class="rounded-lg" />
+        <p class="text-white text-base font-medium leading-normal">
+          Cobertura AIS
+        </p>
+      </div>
     </div>
+    <div class="flex flex-col gap-3 pb-3">
+      <div
+        class="w-full bg-center bg-no-repeat aspect-square bg-cover rounded-xl">
+        <img
+          ngSrc="assets/escalas.webp"
+          alt="Trafico"
+          width="400"
+          height="400"
+          loading="lazy"
+          class="rounded-lg" />
+        <p class="text-white text-base font-medium leading-normal">Escalas</p>
+      </div>
+    </div>
+  </div>
 </section>

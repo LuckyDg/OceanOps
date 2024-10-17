@@ -5,10 +5,7 @@ import { LucideAngularModule, Container } from 'lucide-angular';
 @Component({
   selector: 'app-container-card',
   standalone: true,
-  imports: [
-    CommonModule,
-    LucideAngularModule
-  ],
+  imports: [CommonModule, LucideAngularModule],
   templateUrl: './container-card.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

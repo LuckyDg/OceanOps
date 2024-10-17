@@ -1,9 +1,8 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { CommonModule, NgOptimizedImage } from '@angular/common';
-import { ContainerCardComponent } from '../../core/components/container-card/container-card.component';
-import { ReportCardComponent } from '../../core/components/report-card/report-card.component';
-import { VesselCardComponent, UseCardComponent } from '../../core';
-
+import { ContainerCardComponent } from '@core/components/container-card/container-card.component';
+import { ReportCardComponent } from '@core/components/report-card/report-card.component';
+import { UseCardComponent, VesselCardComponent } from '@core/index';
 
 @Component({
   selector: 'app-fleet-summary',
@@ -14,9 +13,9 @@ import { VesselCardComponent, UseCardComponent } from '../../core';
     ContainerCardComponent,
     UseCardComponent,
     ReportCardComponent,
-    NgOptimizedImage
+    NgOptimizedImage,
   ],
   templateUrl: './fleet-summary.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class FleetSummaryComponent { }
+export class FleetSummaryComponent {}

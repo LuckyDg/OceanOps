@@ -4,10 +4,7 @@ import { LucideAngularModule, Ship } from 'lucide-angular';
 @Component({
   selector: 'app-vessel-card',
   standalone: true,
-  imports: [
-    CommonModule,
-    LucideAngularModule
-  ],
+  imports: [CommonModule, LucideAngularModule],
   templateUrl: './vessel-card.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

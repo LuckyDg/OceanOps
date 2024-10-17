@@ -96,7 +96,7 @@ npm run test
 Para notificar al usuario sobre eventos importantes, como el inicio de sesión exitoso o un error al generar un reporte, se usa el componente Sonner. Aquí un ejemplo en el código:
 
 ```typescript
-this.toastService.toastSuccess("¡Sesión iniciada exitosamente!");
+this.toastService.toastSuccess('¡Sesión iniciada exitosamente!');
 ```
 
 ## Licencia
@@ -116,3 +116,5 @@ Autor
 ### Contribuciones
 
 Las contribuciones son bienvenidas. Para cambios mayores, por favor abre un issue primero para discutir lo que te gustaría cambiar.
+
+Nota: Falta arreglar el testing para que corra con alias y tambien falta despliegue a vercel

@@ -1,41 +1,55 @@
-<header class="flex items-center justify-between border-b border-b-[#292e38] px-6 py-3 lg:px-10">
-    <div class="flex items-center gap-4 text-white">
-        <div class="w-8 h-8">
-            <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M44 4H30.6666V17.3334H17.3334V30.6666H4V44H44V4Z" fill="currentColor"></path>
-            </svg>
-        </div>
-        <a href="/" class="text-lg font-bold">Oceanfleet</a>
+<header
+  class="flex items-center justify-between border-b border-b-[#292e38] px-6 py-3 lg:px-10">
+  <div class="flex items-center gap-4 text-white">
+    <div class="w-8 h-8">
+      <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path
+          d="M44 4H30.6666V17.3334H17.3334V30.6666H4V44H44V4Z"
+          fill="currentColor"></path>
+      </svg>
+    </div>
+    <a href="/" class="text-lg font-bold">Oceanfleet</a>
+  </div>
+
+  <nav class="hidden md:flex flex-1 justify-center gap-6 lg:gap-8">
+    <a class="text-sm font-medium text-white" href="/">Dashboard</a>
+    <a class="text-sm font-medium text-white" href="/ship-list">Buques</a>
+  </nav>
+
+  <div class="flex items-center gap-4">
+    <div class="w-full sm:w-auto" *ngIf="!isLoggedIn">
+      <select
+        id="role"
+        name="role"
+        [(ngModel)]="selectedRole"
+        class="block w-full rounded-md border-2 border-gray-700 py-1 text-gray-300 bg-gray-950 shadow-sm focus:ring-emerald-500 sm:max-w-xs sm:text-sm">
+        <option class="text-gray-400" value="" disabled>Select Role</option>
+        <option *ngFor="let role of roles" [value]="role" class="text-gray-200">
+          {{ role }}
+        </option>
+      </select>
     </div>
 
-    <nav class="hidden md:flex flex-1 justify-center gap-6 lg:gap-8">
-        <a class="text-sm font-medium text-white" href="/">Dashboard</a>
-        <a class="text-sm font-medium text-white" href="/ship-list">Buques</a>
-    </nav>
-
-    <div class="flex items-center gap-4">
-        <div class="w-full sm:w-auto" *ngIf="!isLoggedIn">
-            <select id="role" name="role" [(ngModel)]="selectedRole"
-                class="block w-full rounded-md border-2 border-gray-700 py-1 text-gray-300 bg-gray-950 shadow-sm focus:ring-emerald-500 sm:max-w-xs sm:text-sm">
-                <option class="text-gray-400" value="" disabled>Select Role</option>
-                <option *ngFor="let role of roles" [value]="role" class="text-gray-200">{{ role }}</option>
-            </select>
-        </div>
-
-        <div *ngIf="isLoggedIn" class="text-white text-sm font-medium">
-            {{ user?.name }} ({{ user?.role }})
-        </div>
-
-        <button (click)="toggleLogin()"
-            class="bg-emerald-500 hover:bg-emerald-600 text-white text-sm px-4 py-1 rounded shadow-2xl transition-all">
-            {{ isLoggedIn ? 'Logout' : 'Login' }}
-        </button>
-
-        <div class="flex items-center space-x-1"
-            [ngClass]="{'text-emerald-500': isLoggedIn, 'text-red-500': !isLoggedIn}">
-            <span class="text-sm font-medium">{{ isLoggedIn ? 'Connected' : 'Disconnected' }}</span>
-            <app-icon-rocket></app-icon-rocket>
-        </div>
+    <div *ngIf="isLoggedIn" class="text-white text-sm font-medium">
+      {{ user?.name }} ({{ user?.role }})
     </div>
 
+    <button
+      (click)="toggleLogin()"
+      class="bg-emerald-500 hover:bg-emerald-600 text-white text-sm px-4 py-1 rounded shadow-2xl transition-all">
+      {{ isLoggedIn ? 'Logout' : 'Login' }}
+    </button>
+
+    <div
+      class="flex items-center space-x-1"
+      [ngClass]="{
+        'text-emerald-500': isLoggedIn,
+        'text-red-500': !isLoggedIn,
+      }">
+      <span class="text-sm font-medium">{{
+        isLoggedIn ? 'Connected' : 'Disconnected'
+      }}</span>
+      <app-icon-rocket></app-icon-rocket>
+    </div>
+  </div>
 </header>

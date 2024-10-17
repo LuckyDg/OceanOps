@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
-import { toast, } from 'ngx-sonner';
+import { toast } from 'ngx-sonner';
+
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ToastNotificationService {
-
   // Toast Success
   toastSuccess(message: string, description?: string) {
     toast.success(message, {

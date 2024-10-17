@@ -1,33 +1,40 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component } from '@angular/core';
-import { IconCheck } from '../../core/index';
-import { ContainerIcon } from "../../core/icons/container";
-import { ReportIcon } from "../../core/icons/report";
-import { IconGrid } from '../../core/icons/grid';
-import { IconList } from '../../core/icons/list';
-import { IconChevronDown } from '../../core/icons/chevron-down';
-import { ShippingService } from '../../service/shipping.service';
+import {
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  Component,
+  OnInit,
+} from '@angular/core';
+
+import { ShippingService } from '@services/shipping.service';
 import { Router } from '@angular/router';
-import { Vessel } from '../../models/buques.model';
+import { Vessel } from '@models/buques.model';
 import { debounceTime, Subject } from 'rxjs';
+import {
+  IconCheckComponent,
+  IconChevronDownComponent,
+  ContainerIconComponent,
+  ReportIconComponent,
+} from '@core/index';
+
 @Component({
   selector: 'app-ship-list',
   standalone: true,
   imports: [
     CommonModule,
-    IconCheck, IconGrid, IconList, IconChevronDown,
-    ContainerIcon,
-    ReportIcon,
+    IconCheckComponent,
+
+    IconChevronDownComponent,
+    ContainerIconComponent,
+    ReportIconComponent,
   ],
   templateUrl: './ship-list.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ShipListComponent {
+export class ShipListComponent implements OnInit {
   // Iconos
-  IconGrid = IconGrid;
-  IconCheck = IconCheck;
-  IconList = IconList;
-  IconChevronDown = IconChevronDown;
+  IconCheck = IconCheckComponent;
+  IconChevronDown = IconChevronDownComponent;
 
   vessels: Vessel[] = [];
   selectedContainer: any;
@@ -36,7 +43,11 @@ export class ShipListComponent {
   sortedVessels: Vessel[] = [];
   searchQuery = new Subject<string>();
 
-  constructor(private readonly shippingService: ShippingService, private readonly router: Router, private readonly cd: ChangeDetectorRef) { }
+  constructor(
+    private readonly shippingService: ShippingService,
+    private readonly router: Router,
+    private readonly cd: ChangeDetectorRef
+  ) {}
 
   ngOnInit(): void {
     this.shippingService.getVessels().subscribe((vessels: Vessel[]) => {
@@ -45,7 +56,7 @@ export class ShipListComponent {
       this.cd.markForCheck();
     });
 
-    this.searchQuery.pipe(debounceTime(300)).subscribe((query) => {
+    this.searchQuery.pipe(debounceTime(300)).subscribe(query => {
       this.searchVessels(query);
       this.cd.markForCheck();
     });
@@ -61,7 +72,7 @@ export class ShipListComponent {
 
   searchVessels(query: string) {
     if (query) {
-      this.sortedVessels = this.vessels.filter((vessel) =>
+      this.sortedVessels = this.vessels.filter(vessel =>
         vessel.name.toLowerCase().includes(query.toLowerCase())
       );
     } else {
@@ -76,5 +87,4 @@ export class ShipListComponent {
       vessel.name.toLowerCase().includes(query)
     );
   }
-
 }

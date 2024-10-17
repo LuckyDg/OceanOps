@@ -1,141 +1,189 @@
 <div class="min-h-screen p-6 flex items-center justify-center text-gray-300">
-    <div class="flex mx-auto max-w-6xl w-full rounded-xl border border-gray-700 shadow-lg lg:flex-row">
-        <div class="p-6">
+  <div
+    class="flex mx-auto max-w-6xl w-full rounded-xl border border-gray-700 shadow-lg lg:flex-row">
+    <div class="p-6">
+      <div class="justify-between flex items-center">
+        <h1 class="mb-4 text-2xl font-semibold text-gray-300">
+          Detalles del Barco
+        </h1>
+      </div>
 
-            <div class="justify-between flex items-center">
-                <h1 class="mb-4 text-2xl font-semibold text-gray-300">
-                    Detalles del Barco
-                </h1>
-            </div>
+      <div class="mb-4 justify-between">
+        <div class="mt-2 flex items-center space-x-3">
+          <img
+            src="/placeholder-user.webp"
+            alt="Vehículo"
+            class="h-10 w-10 rounded-full" />
+          <div>
+            <p class="text-sm font-medium text-gray-300">
+              Capitana: {{ capitans[0].name }}
+            </p>
+            <p class="text-sm text-gray-400">
+              Matrícula: {{ capitans[0].matricula }}
+            </p>
+          </div>
+        </div>
+      </div>
 
-            <div class="mb-4 justify-between">
-                <div class="mt-2 flex items-center space-x-3">
-                    <img src="/placeholder-user.webp" alt="Vehículo" class="h-10 w-10 rounded-full" />
-                    <div>
-                        <p class="text-sm font-medium text-gray-300">Capitana: {{ capitans[0].name }}</p>
-                        <p class="text-sm text-gray-400">Matrícula: {{ capitans[0].matricula }}</p>
-                    </div>
-                </div>
-            </div>
-
-            <div *ngIf="isAdmin">
-                <h2 class="mb-3 text-lg font-semibold text-gray-300">Detalles de Contenedores</h2>
-                <div class="grid grid-cols-4 gap-4">
-                    <button *ngFor="let container of containers" (click)="selectContainer(container)"
-                        class="flex flex-col items-center justify-center space-x-3 cursor-pointer border border-gray-600 rounded-lg p-4 hover:shadow-lg">
-                        <app-icon-container></app-icon-container>
-                        <span class="text-sm font-medium text-gray-300">{{ container.name }}</span>
-                        <span class="text-gray-400 text-xs">{{ container.id }}</span>
-                    </button>
-                </div>
-
-                <app-shipping-status [currentStep]="currentStepValue"></app-shipping-status>
-            </div>
-
+      <div *ngIf="isAdmin">
+        <h2 class="mb-3 text-lg font-semibold text-gray-300">
+          Detalles de Contenedores
+        </h2>
+        <div class="grid grid-cols-4 gap-4">
+          <button
+            *ngFor="let container of containers"
+            (click)="selectContainer(container)"
+            class="flex flex-col items-center justify-center space-x-3 cursor-pointer border border-gray-600 rounded-lg p-4 hover:shadow-lg">
+            <app-icon-container></app-icon-container>
+            <span class="text-sm font-medium text-gray-300">{{
+              container.name
+            }}</span>
+            <span class="text-gray-400 text-xs">{{ container.id }}</span>
+          </button>
         </div>
 
-        <!-- Preview Reporte -->
-        <div class="flex-1 p-6">
-            <div *ngIf="!selectedContainer"
-                class="flex border border-dashed border-gray-500 rounded-2xl items-center justify-center h-full">
-                <h2 class="text-2xl text-gray-400">Seleccione un contenedor para ver el reporte</h2>
-            </div>
-
-            <!-- Preview del reporte cuando hay un container seleccionado -->
-            <div id="preview" class="p-6 ">
-                <div *ngIf="selectedContainer" class="border bg-gray-950 border-gray-500 p-6 rounded-2xl shadow-lg">
-                    <div class="border-gray-600 pb-2 mb-2">
-                        <h2 class="text-lg font-semibold mb-4 text-gray-300">Preview</h2>
-                        <div class="flex justify-between items-center mb-4">
-                            <h2 class="text-sm font-medium text-gray-300">{{ invoiceNumber }}</h2>
-                            <span class="text-sm font-medium text-emerald-400">Actualizado: Hoy a las 4:30 PM</span>
-                        </div>
-                        <div class="pb-4">
-                            <div class="flex justify-between items-center mt-1">
-                                <p class="text-sm text-gray-400">Cliente:</p>
-                                <p class="text-sm text-gray-400">{{ selectedContainer.user.name }}</p>
-                            </div>
-                            <div class="flex justify-between items-center mb-1">
-                                <p class="text-sm text-gray-400">Teléfono:</p>
-                                <p class="text-sm text-gray-400">{{ selectedContainer.user.phone }}</p>
-                            </div>
-                            <div class="flex justify-between items-center mb-1">
-                                <p class="text-sm text-gray-400">Correo:</p>
-                                <p class="text-sm text-gray-400">{{ selectedContainer.user.email }}</p>
-                            </div>
-                            <div class="flex justify-between items-center mb-1">
-                                <p class="text-sm text-gray-400">Dirección:</p>
-                                <p class="text-sm text-gray-400">{{ selectedContainer.user.address }}</p>
-                            </div>
-                        </div>
-
-                        <div class="border-t border-gray-600 pt-4">
-                            <h3 class="text-base font-medium text-gray-300 mb-2">Detalles del Contenedor</h3>
-                            <div class="flex justify-between items-center mb-2">
-                                <p class="text-sm text-gray-400">Código:</p>
-                                <p class="text-sm text-gray-400">{{ selectedContainer.id }}</p>
-                            </div>
-                            <div class="flex justify-between items-center mb-2">
-                                <p class="text-sm text-gray-400">Tipo:</p>
-                                <p class="text-sm text-gray-400">{{ selectedContainer.type }}</p>
-                            </div>
-                            <div class="flex justify-between items-center mb-2">
-                                <p class="text-sm text-gray-400">Peso:</p>
-                                <p class="text-sm text-gray-400">{{ selectedContainer.weight }}</p>
-                            </div>
-                            <div class="flex justify-between items-center mb-2">
-                                <p class="text-sm text-gray-400">Dimensiones:</p>
-                                <p class="text-sm text-gray-400">{{ selectedContainer.dimensions }}</p>
-                            </div>
-                            <div class="flex justify-between items-center mb-2">
-                                <p class="text-sm text-gray-400">Estado:</p>
-                                <p class="text-sm text-gray-400">{{ selectedContainer.status }}</p>
-                            </div>
-                            <div class="flex justify-between items-center mb-2">
-                                <p class="text-sm text-gray-400">Fecha de Carga:</p>
-                                <p class="text-sm text-gray-400">{{ selectedContainer.loadingDate }}</p>
-                            </div>
-                        </div>
-
-                        <div class="mt-6 border-t border-gray-600 pt-4">
-                            <h3 class="text-base font-medium text-gray-300 mb-2">Información del Barco</h3>
-                            <div class="flex justify-between items-center mb-2">
-                                <p class="text-sm text-gray-400">Nombre del Barco:</p>
-                                <p class="text-sm text-gray-400">
-                                    {{ selectedContainer.ship.name.substring(0, 15) }}
-                                </p>
-
-
-                            </div>
-                            <div class="flex justify-between items-center mb-2">
-                                <p class="text-sm text-gray-400">Código del Barco:</p>
-                                <p class="text-sm text-gray-400">{{ selectedContainer.ship.code }}</p>
-                            </div>
-                        </div>
-
-                        <div class="mt-6 border-t border-gray-600 pt-4">
-                            <h3 class="text-base font-medium text-gray-300 mb-2">Adjuntos</h3>
-                            <div class="flex items-center justify-between p-4 border border-gray-600 rounded-lg">
-                                <div class="flex items-center space-x-2">
-                                    <div class="p-2 rounded">
-                                        <app-icon-pdf></app-icon-pdf>
-                                    </div>
-                                    <div class="flex flex-col">
-                                        <span class="text-sm font-medium text-gray-300">{{ invoiceNumber }}.PDF</span>
-                                        <span class="text-xs text-gray-500">512kb</span>
-                                    </div>
-                                </div>
-
-                                <button (click)="generatePDF()"
-                                    class="text-blue-400 hover:text-blue-500 flex items-center space-x-2">
-                                    <span class="text-sm font-medium">Download</span>
-                                    <app-icon-download></app-icon-download>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+        <app-shipping-status
+          [currentStep]="currentStepValue"></app-shipping-status>
+      </div>
     </div>
+
+    <!-- Preview Reporte -->
+    <div class="flex-1 p-6">
+      <div
+        *ngIf="!selectedContainer"
+        class="flex border border-dashed border-gray-500 rounded-2xl items-center justify-center h-full">
+        <h2 class="text-2xl text-gray-400">
+          Seleccione un contenedor para ver el reporte
+        </h2>
+      </div>
+
+      <!-- Preview del reporte cuando hay un container seleccionado -->
+      <div id="preview" class="p-6">
+        <div
+          *ngIf="selectedContainer"
+          class="border bg-gray-950 border-gray-500 p-6 rounded-2xl shadow-lg">
+          <div class="border-gray-600 pb-2 mb-2">
+            <h2 class="text-lg font-semibold mb-4 text-gray-300">Preview</h2>
+            <div class="flex justify-between items-center mb-4">
+              <h2 class="text-sm font-medium text-gray-300">
+                {{ invoiceNumber }}
+              </h2>
+              <span class="text-sm font-medium text-emerald-400"
+                >Actualizado: Hoy a las 4:30 PM</span
+              >
+            </div>
+            <div class="pb-4">
+              <div class="flex justify-between items-center mt-1">
+                <p class="text-sm text-gray-400">Cliente:</p>
+                <p class="text-sm text-gray-400">
+                  {{ selectedContainer.user.name }}
+                </p>
+              </div>
+              <div class="flex justify-between items-center mb-1">
+                <p class="text-sm text-gray-400">Teléfono:</p>
+                <p class="text-sm text-gray-400">
+                  {{ selectedContainer.user.phone }}
+                </p>
+              </div>
+              <div class="flex justify-between items-center mb-1">
+                <p class="text-sm text-gray-400">Correo:</p>
+                <p class="text-sm text-gray-400">
+                  {{ selectedContainer.user.email }}
+                </p>
+              </div>
+              <div class="flex justify-between items-center mb-1">
+                <p class="text-sm text-gray-400">Dirección:</p>
+                <p class="text-sm text-gray-400">
+                  {{ selectedContainer.user.address }}
+                </p>
+              </div>
+            </div>
+
+            <div class="border-t border-gray-600 pt-4">
+              <h3 class="text-base font-medium text-gray-300 mb-2">
+                Detalles del Contenedor
+              </h3>
+              <div class="flex justify-between items-center mb-2">
+                <p class="text-sm text-gray-400">Código:</p>
+                <p class="text-sm text-gray-400">{{ selectedContainer.id }}</p>
+              </div>
+              <div class="flex justify-between items-center mb-2">
+                <p class="text-sm text-gray-400">Tipo:</p>
+                <p class="text-sm text-gray-400">
+                  {{ selectedContainer.type }}
+                </p>
+              </div>
+              <div class="flex justify-between items-center mb-2">
+                <p class="text-sm text-gray-400">Peso:</p>
+                <p class="text-sm text-gray-400">
+                  {{ selectedContainer.weight }}
+                </p>
+              </div>
+              <div class="flex justify-between items-center mb-2">
+                <p class="text-sm text-gray-400">Dimensiones:</p>
+                <p class="text-sm text-gray-400">
+                  {{ selectedContainer.dimensions }}
+                </p>
+              </div>
+              <div class="flex justify-between items-center mb-2">
+                <p class="text-sm text-gray-400">Estado:</p>
+                <p class="text-sm text-gray-400">
+                  {{ selectedContainer.status }}
+                </p>
+              </div>
+              <div class="flex justify-between items-center mb-2">
+                <p class="text-sm text-gray-400">Fecha de Carga:</p>
+                <p class="text-sm text-gray-400">
+                  {{ selectedContainer.loadingDate }}
+                </p>
+              </div>
+            </div>
+
+            <div class="mt-6 border-t border-gray-600 pt-4">
+              <h3 class="text-base font-medium text-gray-300 mb-2">
+                Información del Barco
+              </h3>
+              <div class="flex justify-between items-center mb-2">
+                <p class="text-sm text-gray-400">Nombre del Barco:</p>
+                <p class="text-sm text-gray-400">
+                  {{ selectedContainer.ship.name.substring(0, 15) }}
+                </p>
+              </div>
+              <div class="flex justify-between items-center mb-2">
+                <p class="text-sm text-gray-400">Código del Barco:</p>
+                <p class="text-sm text-gray-400">
+                  {{ selectedContainer.ship.code }}
+                </p>
+              </div>
+            </div>
+
+            <div class="mt-6 border-t border-gray-600 pt-4">
+              <h3 class="text-base font-medium text-gray-300 mb-2">Adjuntos</h3>
+              <div
+                class="flex items-center justify-between p-4 border border-gray-600 rounded-lg">
+                <div class="flex items-center space-x-2">
+                  <div class="p-2 rounded">
+                    <app-icon-pdf></app-icon-pdf>
+                  </div>
+                  <div class="flex flex-col">
+                    <span class="text-sm font-medium text-gray-300"
+                      >{{ invoiceNumber }}.PDF</span
+                    >
+                    <span class="text-xs text-gray-500">512kb</span>
+                  </div>
+                </div>
+
+                <button
+                  (click)="generatePDF()"
+                  class="text-blue-400 hover:text-blue-500 flex items-center space-x-2">
+                  <span class="text-sm font-medium">Download</span>
+                  <app-icon-download></app-icon-download>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>

@@ -1,3 +1,3 @@
 export const environment = {
-    apiUrl: '/assets/data.json'
+  apiUrl: '/assets/data.json',
 };
