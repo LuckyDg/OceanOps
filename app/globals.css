@@ -1,0 +1,38 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 222 47% 8%;
+    --surface: 222 47% 11%;
+    --border: 222 47% 16%;
+    --primary: 217 91% 60%;
+    --secondary: 189 94% 43%;
+    --danger: 0 84% 60%;
+    --success: 160 84% 39%;
+    --warning: 38 92% 50%;
+  }
+
+  * {
+    @apply border-[#1F2937];
+  }
+
+  body {
+    @apply bg-[#0A0F1E] text-[#F9FAFB] font-sans;
+  }
+
+  html {
+    color-scheme: dark;
+  }
+}
+
+@layer utilities {
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+}
