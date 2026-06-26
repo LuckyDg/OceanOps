@@ -1,0 +1,45 @@
+<svg width="400" height="200" viewBox="0 0 400 200">
+  <path d="M0,170 C50,160 150,180 200,170 C250,160 350,180 400,170 L400,200 L0,200 Z" fill="#9BD2E1"/>
+
+  <path d="M20,130 L380,130 L390,120 L390,100 L380,90 L20,90 L10,100 L10,120 Z" fill="#3A5C8E"/>
+  
+  <path d="M15,135 Q200,145 385,135 L380,130 L20,130 Z" fill="#CC4C4C"/>
+
+  <rect x="15" y="85" width="370" height="10" fill="#f0f0f0"/>
+
+  <rect x="30" y="50" width="60" height="40" fill="#F0F0F0"/>
+  <rect x="35" y="55" width="50" height="30" fill="#CCCCCC"/>
+  <rect x="40" y="40" width="10" height="10" fill="#888888"/> <rect x="40" y="30" width="2" height="10" fill="#888888"/>
+  <rect x="48" y="40" width="10" height="10" fill="#888888"/>
+  <rect x="48" y="30" width="2" height="10" fill="#888888"/>
+  <rect x="56" y="40" width="10" height="10" fill="#888888"/>
+  <rect x="56" y="30" width="2" height="10" fill="#888888"/>
+
+  <rect x="100" y="60" width="40" height="30" fill="#A2C850"/>
+  <rect x="100" y="30" width="40" height="30" fill="#E06A58"/>
+  <rect x="350" y="60" width="40" height="30" fill="#A2C850"/>
+  <rect x="350" y="30" width="40" height="30" fill="#E06A58"/>
+
+  <g id="capacity-indicator">
+    <rect class="progress-background" x="150" y="50" width="200" height="80" fill="#ecf0f1" rx="5" ry="5"/>
+    
+    <rect 
+      x="150" y="50" height="80" fill="#e74c3c" rx="5" ry="5"
+      [attr.width]="percentage / 100 * 200"
+      [style.transition]="'width 0.5s ease-out'">
+    </rect>
+
+    <text 
+      x="250" y="95" font-family="Arial, sans-serif" font-size="30" font-weight="bold" fill="white" text-anchor="middle" dominant-baseline="middle">
+      {{ percentage }}%
+    </text>
+
+    <pattern id="diagonal-stripe" patternUnits="userSpaceOnUse" width="10" height="10">
+      <path d="M-1,1 l2,-2 M0,10 l10,-10 M9,11 l2,-2" stroke="#D34B4B" stroke-width="2"/>
+    </pattern>
+    <rect x="150" y="50" height="80" fill="url(#diagonal-stripe)" rx="5" ry="5"
+          [attr.width]="percentage / 100 * 200"
+          [style.transition]="'width 0.5s ease-out'">
+    </rect>
+  </g>
+</svg>

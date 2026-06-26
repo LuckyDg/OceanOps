@@ -1,12 +1,13 @@
+import path from 'path';
+import { fileURLToPath } from 'url';
+
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
+
+/** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
-  async rewrites() {
-    return [
-      {
-        source: '/api/v1/:path*',
-        destination: `${process.env.BACKEND_URL || 'http://localhost:3001'}/api/v1/:path*`,
-      },
-    ];
+  turbopack: {
+    root: __dirname,
   },
 };
 

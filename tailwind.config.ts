@@ -10,19 +10,32 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        background: '#0A0F1E',
-        surface: '#111827',
-        border: '#1F2937',
-        primary: '#3B82F6',
-        secondary: '#06B6D4',
-        danger: '#EF4444',
-        success: '#10B981',
-        warning: '#F59E0B',
-        'text-primary': '#F9FAFB',
-        'text-muted': '#6B7280',
+        background:  'var(--background)',
+        surface: {
+          DEFAULT: 'var(--surface)',
+          hover:   'var(--surface-hover)',
+          hi:      'var(--surface-hi)',
+        },
+        border: {
+          DEFAULT: 'var(--border)',
+          hi:      'var(--border-hi)',
+        },
+        foreground:  'var(--foreground)',
+        muted:       'var(--muted)',
+        subtle:      'var(--subtle)',
+        accent: {
+          DEFAULT: 'var(--accent)',
+          hi:      'var(--accent-hi)',
+          fg:      'var(--accent-fg)',
+          ghost:   'var(--accent-ghost)',
+        },
+      },
+      borderRadius: {
+        DEFAULT: 'var(--radius)',
       },
       fontFamily: {
-        sans: ['Inter', 'system-ui', 'sans-serif'],
+        sans: ['var(--font-sans)', 'system-ui', 'sans-serif'],
+        mono: ['var(--font-mono)', 'monospace'],
       },
     },
   },

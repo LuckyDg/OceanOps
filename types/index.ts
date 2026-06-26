@@ -1,205 +1,107 @@
-// User types
-export type UserRole = 'admin' | 'operator' | 'auditor' | 'user';
+// ─── Fishing Zones ────────────────────────────────────────────────────────────
 
-export interface User {
-  id: string;
-  email: string;
+export type FishingZoneId =
+  | 'gulf-mexico'
+  | 'pacific-northwest'
+  | 'northeast-atlantic'
+  | 'caribbean'
+  | 'alaska';
+
+export interface FishingZone {
+  id: FishingZoneId;
   name: string;
-  avatar_url?: string;
-  role: UserRole;
-  permissions: string[];
-  is_active: boolean;
-  last_login?: string;
-  created_at: string;
+  lat: number;
+  lon: number;
+  /** IANA timezone, e.g. "America/Chicago" */
+  timezone: string;
 }
 
-// Ship types
-export type ShipType = 'cargo' | 'container' | 'tanker' | 'bulk_carrier' | 'roll_on_roll_off';
-export type ShipStatus = 'in_port' | 'in_transit' | 'maintenance' | 'out_of_service';
+// ─── Marine / Weather Conditions ──────────────────────────────────────────────
 
-export interface Ship {
-  id: string;
-  name: string;
-  imo_number: string;
-  call_sign: string;
-  type: ShipType;
-  status: ShipStatus;
-  length: number;
-  width: number;
-  draft: number;
-  gross_tonnage: number;
-  deadweight_tonnage: number;
-  max_containers: number;
-  current_port_id?: string;
-  next_port_id?: string;
-  estimated_arrival?: string;
-  estimated_departure?: string;
-  is_active: boolean;
-  created_at: string;
+export interface MarineConditions {
+  zoneId: FishingZoneId;
+  fetchedAt: string; // ISO 8601
+  /** Significant wave height in metres */
+  waveHeightM: number;
+  /** Peak wave period in seconds */
+  wavePeriodS: number;
+  /** Wind speed at 10 m (km/h) */
+  windSpeedKmh: number;
+  /** Wind direction in degrees (0 = N) */
+  windDirectionDeg: number;
+  /** Sea surface temperature °C */
+  seaTempC: number;
+  /** Ocean current speed m/s */
+  currentSpeedMs: number;
+  /** Visibility km — derived from weather model */
+  visibilityKm: number;
 }
 
-// Container types
-export type ContainerType = 'dry' | 'refrigerated' | 'tank' | 'flat_rack' | 'open_top' | 'high_cube';
-export type ContainerSize = '20ft' | '40ft' | '45ft';
-export type ContainerStatus = 'empty' | 'loaded' | 'in_transit' | 'in_port' | 'delivered' | 'damaged';
+// ─── Tidal Data ───────────────────────────────────────────────────────────────
 
-export interface Container {
-  id: string;
-  container_number: string;
-  type: ContainerType;
-  size: ContainerSize;
-  status: ContainerStatus;
-  weight: number;
-  max_weight: number;
-  temperature?: number;
-  description?: string;
-  current_port_id?: string;
-  destination_port_id?: string;
-  ship_id?: string;
-  is_active: boolean;
+export interface TidalEvent {
+  time: string; // ISO 8601
+  type: 'high' | 'low';
+  heightM: number;
 }
 
-// Cargo types
-export type CargoType =
-  | 'general'
-  | 'hazardous'
-  | 'refrigerated'
-  | 'liquid'
-  | 'solid'
-  | 'machinery'
-  | 'vehicles'
-  | 'food'
-  | 'chemicals'
-  | 'textiles';
-
-export type CargoStatus = 'pending' | 'loaded' | 'in_transit' | 'delivered' | 'damaged' | 'lost';
-export type HazardLevel = 'none' | 'low' | 'medium' | 'high' | 'extreme';
-
-export interface Cargo {
-  id: string;
-  description: string;
-  type: CargoType;
-  status: CargoStatus;
-  weight: number;
-  volume: number;
-  value: number;
-  origin: string;
-  destination: string;
-  hazard_level: HazardLevel;
-  hazard_description?: string;
-  is_illegal: boolean;
-  illegal_reason?: string;
-  loading_date?: string;
-  expected_delivery?: string;
-  tracking_number: string;
-  shipper_name: string;
-  consignee_name: string;
-  container_id?: string;
+export interface TidalData {
+  zoneId: FishingZoneId;
+  stationId: string;
+  stationName: string;
+  fetchedAt: string;
+  events: TidalEvent[];
 }
 
-// Port types
-export type PortType = 'commercial' | 'industrial' | 'fishing' | 'military' | 'cruise' | 'mixed';
-export type PortSize = 'small' | 'medium' | 'large' | 'mega';
+// ─── Fishing Conditions Score ─────────────────────────────────────────────────
 
-export interface Port {
-  id: string;
-  name: string;
-  code: string;
-  country: string;
-  city: string;
-  latitude: number;
-  longitude: number;
-  type: PortType;
-  size: PortSize;
-  max_ships: number;
-  max_containers: number;
-  max_draft: number;
-  is_active: boolean;
-  is_operational: boolean;
-  last_inspection?: string;
+export type FishingRating = 'excellent' | 'good' | 'fair' | 'poor';
+
+export interface FishingConditions {
+  zoneId: FishingZoneId;
+  rating: FishingRating;
+  /** 0–100 composite score */
+  score: number;
+  factors: {
+    waves: number;
+    wind: number;
+    tide: number;
+    temperature: number;
+  };
 }
 
-// Pagination
-export interface PaginatedResponse<T> {
-  data: T[];
-  total: number;
-  page: number;
-  limit: number;
-  totalPages: number;
+// ─── AI Daily Summary ─────────────────────────────────────────────────────────
+
+export interface ZoneSummary {
+  zoneId: FishingZoneId;
+  summary: string;
+  keyPoints: string[];
+  rating: FishingRating;
 }
 
-// Auth
-export interface AuthTokens {
-  access_token: string;
-  refresh_token: string;
+export interface DailySummary {
+  date: string; // YYYY-MM-DD
+  generatedAt: string; // ISO 8601
+  model: string;
+  zones: ZoneSummary[];
 }
 
-export interface LoginResponse {
-  access_token: string;
-  refresh_token: string;
-  user: User;
+// ─── Static Data File Shape ───────────────────────────────────────────────────
+
+/** Shape of public/data/daily.json */
+export interface DailyDataFile {
+  date: string;
+  updatedAt: string;
+  conditions: MarineConditions[];
+  tides: TidalData[];
+  fishing: FishingConditions[];
+  summary: DailySummary | null;
 }
 
-export interface LoginCredentials {
-  email: string;
-  password: string;
+// ─── UI State ─────────────────────────────────────────────────────────────────
+
+export interface AppUIState {
+  selectedZone: FishingZoneId | null;
+  sidebarOpen: boolean;
 }
 
-// Reports
-export interface TrafficReportParams {
-  origin_port_id?: string;
-  destination_port_id?: string;
-  start_date?: string;
-  end_date?: string;
-}
-
-export interface TrafficReportData {
-  port: string;
-  shipments: number;
-  volume: number;
-  period: string;
-}
-
-export interface IllegalCargoReportParams {
-  start_date?: string;
-  end_date?: string;
-}
-
-export interface IllegalCargoItem {
-  id: string;
-  tracking_number: string;
-  description: string;
-  illegal_reason: string;
-  shipper_name: string;
-  origin: string;
-  destination: string;
-  detected_at: string;
-}
-
-// Query params
-export interface ListParams {
-  page?: number;
-  limit?: number;
-  search?: string;
-}
-
-export interface ShipListParams extends ListParams {
-  status?: ShipStatus;
-  type?: ShipType;
-}
-
-export interface ContainerListParams extends ListParams {
-  status?: ContainerStatus;
-  type?: ContainerType;
-}
-
-export interface CargoListParams extends ListParams {
-  status?: CargoStatus;
-  type?: CargoType;
-  is_illegal?: boolean;
-}
-
-export interface PortListParams extends ListParams {
-  country?: string;
-  type?: PortType;
-}

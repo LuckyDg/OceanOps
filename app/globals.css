@@ -4,26 +4,77 @@
 
 @layer base {
   :root {
-    --background: 222 47% 8%;
-    --surface: 222 47% 11%;
-    --border: 222 47% 16%;
-    --primary: 217 91% 60%;
-    --secondary: 189 94% 43%;
-    --danger: 0 84% 60%;
-    --success: 160 84% 39%;
-    --warning: 38 92% 50%;
+    /* Light mode */
+    --background:    #ffffff;
+    --surface:       #fafafa;
+    --surface-hover: #f4f4f5;
+    --surface-hi:    #ebebed;
+    --border:        rgba(0, 0, 0, 0.08);
+    --border-hi:     rgba(0, 0, 0, 0.16);
+    --foreground:    #111111;
+    --muted:         #888888;
+    --subtle:        #c0c0c4;
+
+    --accent:        #0284c7;
+    --accent-hi:     #0369a1;
+    --accent-fg:     #ffffff;
+    --accent-ghost:  rgba(2, 132, 199, 0.08);
+
+    --excellent:     #059669;
+    --excellent-bg:  rgba(5, 150, 105, 0.08);
+    --good:          #0284c7;
+    --good-bg:       rgba(2, 132, 199, 0.08);
+    --fair:          #b45309;
+    --fair-bg:       rgba(180, 83, 9, 0.08);
+    --poor:          #dc2626;
+    --poor-bg:       rgba(220, 38, 38, 0.08);
+
+    --radius: 0.5rem;
+  }
+
+  .dark {
+    --background:    #0a0a0f;
+    --surface:       #111116;
+    --surface-hover: #1c1c24;
+    --surface-hi:    #27272f;
+    --border:        rgba(255, 255, 255, 0.06);
+    --border-hi:     rgba(255, 255, 255, 0.12);
+    --foreground:    #ededed;
+    --muted:         #888888;
+    --subtle:        #404048;
+
+    --accent:        #38bdf8;
+    --accent-hi:     #7dd3fc;
+    --accent-fg:     #0c2840;
+    --accent-ghost:  rgba(56, 189, 248, 0.08);
+
+    --excellent:     #34d399;
+    --excellent-bg:  rgba(52, 211, 153, 0.08);
+    --good:          #38bdf8;
+    --good-bg:       rgba(56, 189, 248, 0.08);
+    --fair:          #fbbf24;
+    --fair-bg:       rgba(251, 191, 36, 0.08);
+    --poor:          #f87171;
+    --poor-bg:       rgba(248, 113, 113, 0.08);
   }
 
   * {
-    @apply border-[#1F2937];
-  }
-
-  body {
-    @apply bg-[#0A0F1E] text-[#F9FAFB] font-sans;
+    border-color: var(--border);
+    outline-color: var(--accent);
   }
 
   html {
     color-scheme: dark;
+  }
+  html:not(.dark) {
+    color-scheme: light;
+  }
+
+  body {
+    background-color: var(--background);
+    color: var(--foreground);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
 }
 
@@ -35,4 +86,10 @@
   .scrollbar-hide::-webkit-scrollbar {
     display: none;
   }
+
+  /* Rating badges */
+  .badge-excellent { color: var(--excellent); background: var(--excellent-bg); }
+  .badge-good      { color: var(--good);      background: var(--good-bg); }
+  .badge-fair      { color: var(--fair);       background: var(--fair-bg); }
+  .badge-poor      { color: var(--poor);       background: var(--poor-bg); }
 }

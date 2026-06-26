@@ -1,0 +1,274 @@
+{
+  "date": "2026-06-26",
+  "updatedAt": "2026-06-26T21:54:48.829Z",
+  "conditions": [
+    {
+      "zoneId": "gulf-mexico",
+      "fetchedAt": "2026-06-26T21:54:46.733Z",
+      "waveHeightM": 0.8,
+      "wavePeriodS": 5,
+      "windSpeedKmh": 0,
+      "windDirectionDeg": 0,
+      "seaTempC": 29.3,
+      "currentSpeedMs": 1.2,
+      "visibilityKm": 10
+    },
+    {
+      "zoneId": "pacific-northwest",
+      "fetchedAt": "2026-06-26T21:54:46.731Z",
+      "waveHeightM": 1.7,
+      "wavePeriodS": 7,
+      "windSpeedKmh": 0,
+      "windDirectionDeg": 0,
+      "seaTempC": 13.3,
+      "currentSpeedMs": 0.6,
+      "visibilityKm": 10
+    },
+    {
+      "zoneId": "northeast-atlantic",
+      "fetchedAt": "2026-06-26T21:54:46.732Z",
+      "waveHeightM": 0.6,
+      "wavePeriodS": 3,
+      "windSpeedKmh": 0,
+      "windDirectionDeg": 0,
+      "seaTempC": 17.4,
+      "currentSpeedMs": 1,
+      "visibilityKm": 10
+    },
+    {
+      "zoneId": "caribbean",
+      "fetchedAt": "2026-06-26T21:54:46.732Z",
+      "waveHeightM": 3.2,
+      "wavePeriodS": 7,
+      "windSpeedKmh": 0,
+      "windDirectionDeg": 0,
+      "seaTempC": 28.1,
+      "currentSpeedMs": 2.3,
+      "visibilityKm": 10
+    },
+    {
+      "zoneId": "alaska",
+      "fetchedAt": "2026-06-26T21:54:46.734Z",
+      "waveHeightM": 1.3,
+      "wavePeriodS": 9,
+      "windSpeedKmh": 0,
+      "windDirectionDeg": 0,
+      "seaTempC": 9.4,
+      "currentSpeedMs": 0.6,
+      "visibilityKm": 10
+    }
+  ],
+  "tides": [
+    {
+      "zoneId": "gulf-mexico",
+      "stationId": "8771341",
+      "stationName": "Galveston Bay, TX",
+      "fetchedAt": "2026-06-26T21:54:47.558Z",
+      "events": [
+        {
+          "time": "2026-06-26T00:39:00.000Z",
+          "type": "low",
+          "heightM": -0.07
+        },
+        {
+          "time": "2026-06-26T09:46:00.000Z",
+          "type": "high",
+          "heightM": 0.56
+        }
+      ]
+    },
+    {
+      "zoneId": "pacific-northwest",
+      "stationId": "9440910",
+      "stationName": "Cape Disappointment, WA",
+      "fetchedAt": "2026-06-26T21:54:47.553Z",
+      "events": [
+        {
+          "time": "2026-06-26T05:35:00.000Z",
+          "type": "high",
+          "heightM": 2.52
+        },
+        {
+          "time": "2026-06-26T12:44:00.000Z",
+          "type": "low",
+          "heightM": -0.11
+        },
+        {
+          "time": "2026-06-26T19:31:00.000Z",
+          "type": "high",
+          "heightM": 1.81
+        }
+      ]
+    },
+    {
+      "zoneId": "northeast-atlantic",
+      "stationId": "8443970",
+      "stationName": "Boston, MA",
+      "fetchedAt": "2026-06-26T21:54:47.573Z",
+      "events": [
+        {
+          "time": "2026-06-26T01:06:00.000Z",
+          "type": "high",
+          "heightM": 2.97
+        },
+        {
+          "time": "2026-06-26T07:34:00.000Z",
+          "type": "low",
+          "heightM": 0.31
+        },
+        {
+          "time": "2026-06-26T13:47:00.000Z",
+          "type": "high",
+          "heightM": 2.58
+        },
+        {
+          "time": "2026-06-26T19:34:00.000Z",
+          "type": "low",
+          "heightM": 0.58
+        }
+      ]
+    },
+    {
+      "zoneId": "alaska",
+      "stationId": "9454050",
+      "stationName": "Kodiak, AK",
+      "fetchedAt": "2026-06-26T21:54:47.553Z",
+      "events": [
+        {
+          "time": "2026-06-26T00:50:00.000Z",
+          "type": "low",
+          "heightM": 1.36
+        },
+        {
+          "time": "2026-06-26T07:06:00.000Z",
+          "type": "high",
+          "heightM": 3.56
+        },
+        {
+          "time": "2026-06-26T14:12:00.000Z",
+          "type": "low",
+          "heightM": 0.12
+        },
+        {
+          "time": "2026-06-26T20:44:00.000Z",
+          "type": "high",
+          "heightM": 2.69
+        }
+      ]
+    }
+  ],
+  "fishing": [
+    {
+      "zoneId": "gulf-mexico",
+      "rating": "excellent",
+      "score": 89,
+      "factors": {
+        "waves": 90,
+        "wind": 100,
+        "tide": 75,
+        "temperature": 80
+      }
+    },
+    {
+      "zoneId": "pacific-northwest",
+      "rating": "good",
+      "score": 78,
+      "factors": {
+        "waves": 65,
+        "wind": 100,
+        "tide": 75,
+        "temperature": 70
+      }
+    },
+    {
+      "zoneId": "northeast-atlantic",
+      "rating": "excellent",
+      "score": 90,
+      "factors": {
+        "waves": 90,
+        "wind": 100,
+        "tide": 75,
+        "temperature": 88
+      }
+    },
+    {
+      "zoneId": "caribbean",
+      "rating": "good",
+      "score": 61,
+      "factors": {
+        "waves": 10,
+        "wind": 100,
+        "tide": 75,
+        "temperature": 80
+      }
+    },
+    {
+      "zoneId": "alaska",
+      "rating": "good",
+      "score": 78,
+      "factors": {
+        "waves": 80,
+        "wind": 100,
+        "tide": 75,
+        "temperature": 45
+      }
+    }
+  ],
+  "summary": {
+    "date": "2026-06-26",
+    "generatedAt": "2026-06-26T21:54:48.829Z",
+    "model": "llama-3.1-8b-instant",
+    "zones": [
+      {
+        "zoneId": "gulf-mexico",
+        "rating": "excellent",
+        "summary": "Las condiciones en el Golfo de México son ideales para la pesca, con una temperatura del mar de 29.3°C y una puntuación de pesca de 89/100. Los pescadores recreativos y comerciales pueden esperar una buena captura de especies como el atún y el pez vela.",
+        "keyPoints": [
+          "Vientos cero km/h",
+          "Olas de 0.8m/5s",
+          "Temperatura del mar de 29.3°C"
+        ]
+      },
+      {
+        "zoneId": "pacific-northwest",
+        "rating": "good",
+        "summary": "En el Pacífico Noroeste, las condiciones son moderadas para la pesca, con una temperatura del mar de 13.3°C y una puntuación de pesca de 78/100. Los pescadores pueden esperar una captura de especies como el salmón y el arenque.",
+        "keyPoints": [
+          "Vientos cero km/h",
+          "Olas de 1.7m/7s",
+          "Temperatura del mar de 13.3°C"
+        ]
+      },
+      {
+        "zoneId": "northeast-atlantic",
+        "rating": "excellent",
+        "summary": "El Nordeste del Atlántico ofrece condiciones ideales para la pesca, con una temperatura del mar de 17.4°C y una puntuación de pesca de 90/100. Los pescadores recreativos y comerciales pueden esperar una buena captura de especies como el merluza y la caballa.",
+        "keyPoints": [
+          "Vientos cero km/h",
+          "Olas de 0.6m/3s",
+          "Temperatura del mar de 17.4°C"
+        ]
+      },
+      {
+        "zoneId": "caribbean",
+        "rating": "fair",
+        "summary": "En el Caribe, las condiciones son moderadas para la pesca, con una temperatura del mar de 28.1°C y una puntuación de pesca de 61/100. Los pescadores pueden esperar una captura de especies como el robalo y el pargo.",
+        "keyPoints": [
+          "Vientos cero km/h",
+          "Olas de 3.2m/7s",
+          "Temperatura del mar de 28.1°C"
+        ]
+      },
+      {
+        "zoneId": "alaska",
+        "rating": "good",
+        "summary": "En Alaska, las condiciones son moderadas para la pesca, con una temperatura del mar de 9.4°C y una puntuación de pesca de 78/100. Los pescadores pueden esperar una captura de especies como el salmón y el arenque.",
+        "keyPoints": [
+          "Vientos cero km/h",
+          "Olas de 1.3m/9s",
+          "Temperatura del mar de 9.4°C"
+        ]
+      }
+    ]
+  }
+}
