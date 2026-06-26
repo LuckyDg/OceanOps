@@ -1,118 +1,85 @@
-# Aplicación de Gestión de Flotas (OceanOps)
+# OceanOps — Inteligencia Pesquera Marítima
 
-Este Proyecto esta generado con [Angular CLI](https://github.com/angular/angular-cli) version 18.2.1.
-
-La Aplicación de Gestión de Flotas es una web desarrollada con Angular con el proposito de practicar github actions y para ayudar a gestionar operaciones de flotas rastreando barcos y sus contenedores. Ofrece funcionalidades como la generación de reportes en PDF, mostrar detalles de los contenedores basados en los roles de usuario, y gestionar sesiones de inicio/cierre de sesión. Utiliza Sonner para notificaciones y Jest para pruebas unitarias esta aplicacion esta en desarrollo.
-
-## Tabla de Contenidos
-
-- [Características](#características)
-- [Tecnologías](#tecnologías)
-- [Instalación](#instalación)
-- [Configuración](#configuración)
-- [Ejecución de la Aplicación](#ejecución-de-la-aplicación)
-- [Pruebas](#pruebas)
-- [Licencia](#licencia)
+Dashboard público de condiciones marítimas y pronósticos de pesca, actualizado diariamente con datos reales y análisis de IA.
 
 ## Características
 
-- **Gestión de Barcos:** Ver y gestionar barcos en una interfaz responsiva con tarjetas.
-- **Detalles de Contenedores:** Mostrar información de los contenedores con detalles expandibles al hacer clic.
-- **Generación de Reportes en PDF:** Generar reportes descargables en PDF usando jsPDF y html2canvas.
-- **Control de Acceso Basado en Roles:** Los administradores pueden ver detalles adicionales de los contenedores.
-- **Gestión de Sesiones:** Iniciar y cerrar sesión con notificaciones de éxito o error mediante Sonner.
-- **Notificaciones:** Toasts para dar retroalimentación de acciones clave.
-- **Pruebas:** Pruebas unitarias y end-to-end usando Jest y Cypress.
+- **Condiciones del mar en tiempo real** — altura de ola, viento, temperatura superficial y visibilidad por zona
+- **Predicciones de mareas** — timeline de mareas altas y bajas con countdown a la próxima
+- **Tiempo marino** — brújula de viento, escala Beaufort, alertas de navegación
+- **Pronóstico IA diario** — análisis en español generado automáticamente por zona
+- **Mapa interactivo** — zonas de pesca coloreadas por rating en Leaflet
+- **Modo oscuro/claro** — toggle persistente con tema tipo Vercel + acento azul océano
+- **Totalmente en español** — UI y pronósticos
 
-## Tecnologías
+## Stack
 
-- **Angular 18:** Framework frontend para construir la interfaz web.
-- **TypeScript:** Usado para escribir código JavaScript tipado.
-- **Jest:** Para pruebas unitarias.
-- **Sonner:** Para notificaciones tipo toast.
-- **jsPDF & html2canvas:** Usados para generar y descargar reportes en formato PDF.
+| Capa | Tecnología |
+|------|-----------|
+| Framework | Next.js 15 (App Router, Turbopack) |
+| UI | React 19 + Tailwind CSS v3 |
+| Estado | Zustand v5 |
+| Mapa | Leaflet |
+| Fuente de datos | OpenMeteo Marine API + NOAA Tides |
+| IA | Groq (llama-3.1-8b-instant) |
+| Package manager | pnpm |
+
+No hay backend ni base de datos. Todos los datos se obtienen diariamente mediante un script cron y se almacenan como JSON estático.
 
 ## Instalación
-
-Requisitos Previos
-Asegúrate de tener instalado lo siguiente en tu máquina:
-
-- **Node.js** (versión 18+)
-- **Angular CLI** (versión 18+)
-- **Git**
-
-### Clonar el Repositorio
 
 ```bash
 git clone https://github.com/LuckyDg/OceanOps.git
 cd OceanOps
+pnpm install
 ```
 
-### Instalar Dependencias
+## Variables de entorno
+
+Crea un archivo `.env.local` en la raíz:
+
+```env
+GROQ_API_KEY=gsk_...
+```
+
+Obtén una API key gratuita en [console.groq.com](https://console.groq.com). Sin esta key el dashboard funciona con datos pero sin el resumen IA.
+
+## Comandos
 
 ```bash
-npm install
+pnpm dev          # servidor de desarrollo en localhost:3000
+pnpm build        # build de producción
+pnpm fetch-data   # obtener datos del día y generar pronóstico IA
 ```
 
-## Configuración
+## Actualización de datos
 
-La aplicación utiliza JSON como backend simulado para los datos de los usuarios y los contenedores. Si deseas modificar o extender los datos simulados, puedes encontrar los archivos JSON en la carpeta `src/assets/`.
+El script `pnpm fetch-data` hace lo siguiente en una sola ejecución:
 
-## Ejecución de la Aplicación
+1. Obtiene condiciones marinas de las 5 zonas (OpenMeteo Marine API)
+2. Obtiene predicciones de marea de estaciones NOAA
+3. Calcula puntuación de pesca (0–100) basada en olas, viento y temperatura
+4. Genera resumen en español con Groq IA
+5. Escribe `public/data/daily.json`
 
-Para ejecutar la aplicación localmente, usa el siguiente comando:
+Para producción se recomienda un GitHub Action o cron job que ejecute este script diariamente a las 06:00 UTC.
 
-```bash
-ng serve
-```
+## Zonas cubiertas
 
-Esto iniciará la aplicación en [http://localhost:4200](http://localhost:4200).
+| Zona | Coordenadas |
+|------|------------|
+| Golfo de México | 25.0°N, 90.0°O |
+| Pacífico Noroeste | 47.5°N, 124.5°O |
+| Atlántico NE | 42.0°N, 70.0°O |
+| Mar Caribe | 15.0°N, 75.0°O |
+| Golfo de Alaska | 57.0°N, 153.0°O |
 
-### Compilar
+## Despliegue en Vercel
 
-Para compilar el proyecto para producción, ejecuta:
+1. Conecta el repositorio en [vercel.com](https://vercel.com)
+2. Agrega `GROQ_API_KEY` como variable de entorno
+3. Vercel detecta Next.js y pnpm automáticamente
 
-```bash
-ng build
-```
+---
 
-Los archivos de compilación se almacenarán en el directorio `dist/`.
-
-## Pruebas
-
-El proyecto incluye tanto pruebas unitarias para garantizar la calidad del código.
-
-### Ejecutar Pruebas Unitarias
-
-Las pruebas unitarias están escritas con Jest. Para ejecutarlas, usa el siguiente comando:
-
-```bash
-Copiar código
-npm run test
-```
-
-## Notificaciones con Sonner
-
-Para notificar al usuario sobre eventos importantes, como el inicio de sesión exitoso o un error al generar un reporte, se usa el componente Sonner. Aquí un ejemplo en el código:
-
-```typescript
-this.toastService.toastSuccess('¡Sesión iniciada exitosamente!');
-```
-
-## Licencia
-
-Este proyecto está licenciado bajo la Licencia MIT - mira el archivo [LICENSE](https://github.com/LuckyDg/OceanOps/blob/main/LICENSE) para más detalles.
-
-### Mejoras Futuras
-
-- **Integración con API:** Reemplazar los datos simulados con una API real.
-- **Gestión de Roles:** Extender el control de acceso basado en roles para mayor granularidad.
-- **Mejoras en Rendimiento:** Optimizar la generación de PDF para grandes reportes.
-
-Autor
-
-- [LuckyDg](https://github.com/LuckyDg)
-
-### Contribuciones
-
-Las contribuciones son bienvenidas. Para cambios mayores, por favor abre un issue primero para discutir lo que te gustaría cambiar.
+Autor: [LuckyDg](https://github.com/LuckyDg)
